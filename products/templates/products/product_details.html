@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Product{% endblock title %}
+
+{% block content %}
+
+{% include 'navbar.html' %}
+{% include 'hero.html' %}
+<div class="row">
+    <div class="col-12">
+        <div class="mx-auto tm-gallery-container" style="padding-bottom:10px;">
+            <div class="grid tm-gallery">
+                <a href="{{ product.image.url }}">
+                    <figure class="effect-honey tm-gallery-item">
+                        <img src="{{ product.image.url }}" alt="Image 1" class="img-fluid">
+                        <figcaption>
+                            <h2><i>{{ product.name }}<span>{{ product.price|floatformat:2 }}$</span>
+                            {% if product.present %}<small style="color:lightgreen;">available</small>
+                                {% else %}<small style="color:red;">unavailable</small>{% endif %}</i></h2>
+                        </figcaption>
+                    </figure>
+                </a>
+                <p>{{product.description}}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <center><small>{% if product.present %}Order it <a href="{% url 'order_specific' product.id %}">here</a>
+                        {% else %} Currently unavailable {% endif %}</small></center>
+</div>
+<div class="container">
+    <center><small><a href="{% url 'all_products' %}">Back</a></small></center>
+</div>
+
+
+{% endblock content %}

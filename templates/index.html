@@ -1,0 +1,335 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<nav class="navbar navbar-expand-md tm-navbar" id="tmNav">
+    <div class="container">
+        <div class="tm-next">
+            <a href="#infinite" class="navbar-brand">CityOptics</a>
+        </div>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fas fa-bars navbar-toggler-icon"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link tm-nav-link" href="#whatwedo">What We Offer</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link tm-nav-link" href="#testimonials">Testimonials</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link tm-nav-link" href="#gallery">Gallery</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link tm-nav-link" href="#contact">Contact</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<section id="infinite" class="text-white tm-font-big tm-parallax">
+    <div class="text-center tm-hero-text-container">
+        <div class="tm-hero-text-container-inner">
+            <h2 class="tm-hero-title">CityOptics</h2>
+            <p class="tm-hero-subtitle">
+                Best optics and eye care in the city!!
+            </p>
+        </div>
+    </div>
+
+    <div class="tm-next tm-intro-next">
+        <a href="{% url 'city-optics' %}" class="text-center tm-down-arrow-link">
+            <i class="fas fa-2x fa-arrow-right tm-down-arrow"></i>
+        </a>
+    </div>
+</section>
+
+<section id="whatwedo" class="tm-section-pad-top">
+
+    <div class="container">
+
+        <div class="row tm-content-box"><!-- first row -->
+            <div class="col-lg-12 col-xl-12">
+                <div class="tm-intro-text-container">
+                    <h2 class="tm-text-primary mb-4 tm-section-title">What We Offer</h2>
+                    <p class="mb-4 tm-intro-text">
+                        CityOptics is the most popular Optics Store in the city. Find out why are we so beloved
+                        among the young generations, visit Testimonials section.
+                        We offer you modern designed glasses, popular lenses with world-wide known
+                        solutions and creams for eye protection. You can make an appointment with our doctor
+                        and get fast and appropriate care for your eyes using modern equipment and latest technologies.
+                </div>
+            </div>
+
+        </div><!-- first row -->
+
+        <div class="row tm-content-box"><!-- second row -->
+            <div class="col-lg-1">
+                <i class="far fa-3x fa-chart-bar text-center tm-icon"></i>
+            </div>
+            <div class="col-lg-5">
+                <div class="tm-intro-text-container">
+                    <h2 class="tm-text-primary mb-4">Who is dr Jovana</h2>
+                    <p class="mb-4 tm-intro-text">
+                        Extraordinary curriculum and wide experience in ophthalmology and closely
+                        bind disciplines. Visit my
+                        <a href="https://www.linkedin.com/in/jovana-koprivica-6a54a4195/" target="_blank">
+                            LinkedIn profile</a> to find out more about me.</p>
+                </div>
+            </div>
+
+            <div class="col-lg-1">
+                <i class="far fa-3x fa-comment-alt text-center tm-icon"></i>
+            </div>
+            <div class="col-lg-5">
+                <div class="tm-intro-text-container">
+                    <h2 class="tm-text-primary mb-4">Fast Support</h2>
+                    <p class="mb-4 tm-intro-text">
+                        If you have any questions, doubts or suggestions, you can contact us and get our answer in
+                        glance of an eye. Fill out the form <a href="#contact">below.</a>
+                </div>
+            </div>
+
+        </div><!-- second row -->
+
+        <div class="row tm-content-box"><!-- third row -->
+            <div class="col-lg-1">
+                <i class="fas fa-3x fa-fingerprint text-center tm-icon"></i>
+            </div>
+            <div class="col-lg-5">
+                <div class="tm-intro-text-container">
+                    <h2 class="tm-text-primary mb-4">Top Products</h2>
+                    <p class="mb-4 tm-intro-text">
+                        We have the <strong>best</strong> customers feedback on our Products and Services.
+                        Best care for your
+                        <strong>eyes</strong> in the city - because your eyes is all you need to see.
+                    </p>
+
+                    <div class="tm-continue">
+                        <a href="{% url 'products' %}" class="tm-intro-text tm-btn-primary">Find out More</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-1">
+                <i class="fas fa-3x fa-users text-center tm-icon"></i>
+            </div>
+            <div class="col-lg-5">
+                <div class="tm-intro-text-container">
+                    <h2 class="tm-text-primary mb-4">Make an Appointment</h2>
+                    <p class="mb-4 tm-intro-text">
+                        Need to check your dioptre before any purchase? Make an appointment, and we
+                        will contact you in timely manner. See you soon!
+                    </p>
+
+                    <div class="tm-continue">
+                        <a href="{% url 'appointment' %}" class="tm-intro-text tm-btn-primary">Details</a>
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- third row -->
+
+    </div>
+
+</section>
+
+<section id="testimonials" class="tm-section-pad-top tm-parallax-2">
+    <div class="container tm-testimonials-content">
+        <div class="row">
+            <div class="col-lg-12 tm-content-box">
+                <h2 class="text-white text-center mb-4 tm-section-title">Testimonials</h2>
+                <p class="mx-auto tm-section-desc text-center">
+                    Read the testimonials from our Customers. Find out why are they satisfied with our services
+                    and products. Let them speak instead us.
+                </p>
+                <center><a href="#contact" style="text-transform:capitalize; text-shadow: 4px 4px 5px red;">Leave your own testimony</a></center>
+                <div class="mx-auto tm-gallery-container tm-gallery-container-2">
+                    <div class="tm-testimonials-carousel">
+                        <figure class="tm-testimonial-item">
+                            <img src="{% static 'img/testimonial-img-01.jpg' %}" alt="Image" class="img-fluid mx-auto">
+                            <blockquote>This background image includes a semi-transparent overlay layer. This section
+                                also has a parallax image effect.
+                            </blockquote>
+                            <figcaption>Catherine Win (Designer)</figcaption>
+                        </figure>
+
+                        <figure class="tm-testimonial-item">
+                            <img src="{% static 'img/testimonial-img-02.jpg' %}" alt="Image" class="img-fluid mx-auto">
+                            <blockquote>Testimonial section comes with carousel items. You can use Infinite Loop HTML
+                                CSS template for your websites.
+                            </blockquote>
+                            <figcaption>Dual Rocker (CEO)</figcaption>
+                        </figure>
+
+                        <figure class="tm-testimonial-item">
+                            <img src="{% static 'img/testimonial-img-03.jpg' %}" alt="Image" class="img-fluid mx-auto">
+                            <blockquote>Nulla finibus ligula nec tortor convallis tincidunt. Interdum et malesuada fames
+                                ac ante ipsum primis in faucibus.
+                            </blockquote>
+                            <figcaption>Sandar Soft (Marketing)</figcaption>
+                        </figure>
+
+                        <figure class="tm-testimonial-item">
+                            <img src="{% static 'img/testimonial-img-04.jpg' %}" alt="Image" class="img-fluid mx-auto">
+                            <blockquote>Curabitur rutrum pharetra lobortis. Pellentesque vehicula, velit quis eleifend
+                                fermentum, erat arcu aliquet neque.
+                            </blockquote>
+                            <figcaption>Oliva Htoo (Designer)</figcaption>
+                        </figure>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="tm-bg-overlay"></div>
+</section>
+
+<section id="gallery" class="tm-section-pad-top">
+    <div class="container tm-container-gallery">
+        <div class="row">
+            <div class="text-center col-12">
+                <h2 class="tm-text-primary tm-section-title mb-4">Gallery</h2>
+                <p class="mx-auto tm-section-desc">
+                    Explore our gallery. Get closer to our beautiful staff, smiley faces, our modern looking facility
+                    and latest high-tech instruments we use. Meet our beautiful doctor and her assistant. Looking
+                    forward to meeting you. :)
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="mx-auto tm-gallery-container">
+                    <div class="grid tm-gallery">
+                        <a href="{% static 'img/gallery-img-01.jpg' %}">
+                            <figure class="effect-honey tm-gallery-item">
+                                <img src="{% static 'img/gallery-tn-01.jpg' %}" alt="Image 1" class="img-fluid">
+                                <figcaption>
+                                    <h2><i>Physical Health <span>Exercise!</span></i></h2>
+                                </figcaption>
+                            </figure>
+                        </a>
+                        <a href="{% static 'img/gallery-img-02.jpg' %}">
+                            <figure class="effect-honey tm-gallery-item">
+                                <img src="{% static 'img/gallery-tn-02.jpg' %}" alt="Image 2" class="img-fluid">
+                                <figcaption>
+                                    <h2><i>Rain on Glass <span>Second Image</span></i></h2>
+                                </figcaption>
+                            </figure>
+                        </a>
+                        <a href="{% static 'img/gallery-img-03.jpg' %}">
+                            <figure class="effect-honey tm-gallery-item">
+                                <img src="{% static 'img/gallery-tn-03.jpg' %}" alt="Image 3" class="img-fluid">
+                                <figcaption>
+                                    <h2><i><span>Sea View</span> Mega City</i></h2>
+                                </figcaption>
+                            </figure>
+                        </a>
+                        <a href="{% static 'img/gallery-img-04.jpg' %}">
+                            <figure class="effect-honey tm-gallery-item">
+                                <img src="{% static 'img/gallery-tn-04.jpg' %}" alt="Image 4" class="img-fluid">
+                                <figcaption>
+                                    <h2><i>Dream Girl <span>Thoughts</span></i></h2>
+                                </figcaption>
+                            </figure>
+                        </a>
+                        <a href="{% static 'img/gallery-img-05.jpg' %}">
+                            <figure class="effect-honey tm-gallery-item">
+                                <img src="{% static 'img/gallery-tn-05.jpg' %}" alt="Image 5" class="img-fluid">
+                                <figcaption>
+                                    <h2><i><span>Workstation</span> Offices</i></h2>
+                                </figcaption>
+                            </figure>
+                        </a>
+                        <a href="{% static 'img/gallery-img-06.jpg' %}">
+                            <figure class="effect-honey tm-gallery-item">
+                                <img src="{% static 'img/gallery-tn-06.jpg' %}" alt="Image 6" class="img-fluid">
+                                <figcaption>
+                                    <h2><i>Just Above <span>The City</span></i></h2>
+                                </figcaption>
+                            </figure>
+                        </a>
+                        <a href="{% static 'img/gallery-img-01.jpg' %}">
+                            <figure class="effect-honey tm-gallery-item">
+                                <img src="{% static 'img/gallery-tn-01.jpg' %}" alt="Image 7" class="img-fluid">
+                                <figcaption>
+                                    <h2><i>Another <span>Exercise Time</span></i></h2>
+                                </figcaption>
+                            </figure>
+                        </a>
+                        <a href="{% static 'img/gallery-img-02.jpg' %}">
+                            <figure class="effect-honey tm-gallery-item">
+                                <img src="{% static 'img/gallery-tn-02.jpg' %}" alt="Image 8" class="img-fluid">
+                                <figcaption>
+                                    <h2><i>Repeated <span>Image Spot</span></i></h2>
+                                </figcaption>
+                            </figure>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="tm-section-pad-top tm-parallax-2">
+    <div class="container tm-container-contact">
+        <div class="row">
+
+            <div class="text-center col-12">
+                <h2 class="tm-section-title mb-4">Contact Us</h2>
+                <p class="mb-5">
+                    If you have a question or suggestion for us,
+                    please feel free to contact us at any time using email or
+                    phone contact provided below. You can easily find our address using GoogleMap.
+                    Also, you can write your impressions that will finish in Testimonials section
+                    or just leave us a message, and we will contact you as soon as possible!
+                </p><br>
+            </div>
+
+            <div class="col-sm-12 col-md-6">
+                <form action="{% url 'message' %}" method="POST">
+                    {% csrf_token %}
+                    <input id="name" name="name" type="text" placeholder="Your Name" class="tm-input" required/>
+                    <input id="email" name="email" type="email" placeholder="Your Email" class="tm-input" required/>
+                    <input id="phone" name="phone" type="tel" placeholder="Your Phone" class="tm-input"/>
+                    <textarea id="message" name="message" rows="8" placeholder="Message" class="tm-input"
+                              required></textarea>
+                    <button type="submit" class="btn tm-btn-submit">Submit</button>
+                </form>
+            </div>
+
+            <div class="col-sm-12 col-md-6">
+                <div class="contact-item">
+                    <a rel="nofollow" href="mailto:city.optics.email@gmail.com" class="item-link" target="_blank">
+                        <i class="far fa-2x fa-envelope mr-4"></i>
+                        <span class="mb-0">city.optics.email@gmail.com</span>
+                    </a>
+                </div>
+
+                <div class="contact-item">
+                    <a rel="nofollow"
+                       href="https://www.google.com/maps/place/%D0%94%D0%B8%D0%BC%D0%B8%D1%82%D1%80%D0%B8%D1%98%D0%B0+%D0%9A%D0%BE%D1%82%D1%83%D1%80%D0%BE%D0%B2%D0%B8%D1%9B%D0%B0+16,+%D0%91%D0%B5%D0%BE%D0%B3%D1%80%D0%B0%D0%B4/@44.7456824,20.4474261,17z/data=!3m1!4b1!4m5!3m4!1s0x475a7199058490e9:0x84e8690253bdce74!8m2!3d44.7456824!4d20.4496148"
+                       class="item-link" target="_blank">
+                        <i class="fas fa-2x fa-map-marker-alt mr-4"></i>
+                        <span class="mb-0">Our Location</span>
+                    </a>
+                </div>
+
+                <div class="contact-item">
+                    <a rel="nofollow" href="tel:+38164 2521241" class="item-link">
+                        <i class="fas fa-2x fa-phone-square mr-4"></i>
+                        <span class="mb-0">+38164 2521241</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% include 'footer.html' %}
+{% endblock content %}

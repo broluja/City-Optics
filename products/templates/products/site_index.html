@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Overview{% endblock title %}
+
+{% block content %}
+
+{% include 'navbar.html' %}
+{% include 'hero.html' %}
+
+<br><br>
+{% if results %}
+<ul>
+    {% for result in results %}
+    <li>
+        <a href="{% url 'product_details' result.id %}">{{ result.name }}</a>
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<div class="container">
+    {% if searched_item %}
+    <h3>No results for '{{ searched_item }}'</h3>
+    {% else %}
+    <h1>Welcome to the CityOptics</h1>
+    <small>Thanks for visiting.</small>
+    <small>Let`s start!</small>
+    {% endif %}
+</div>
+{% endif %}
+<br><br>
+
+{% if results %}
+<section id="contact" class="tm-section-pad-top tm-parallax-2">
+    <section id="gallery" class="tm-section-pad-top">
+    <div class="container tm-testimonials-content">
+        <div class="row">
+            <div class="col-12">
+                <div class="mx-auto tm-gallery-container">
+                    <div class="grid tm-gallery">
+                        {% for result in results %}
+                        <a href="{{ result.image.url }}">
+                            <figure class="effect-honey tm-gallery-item">
+                                <img src="{{ result.image.url }}" alt="Image 1" class="img-fluid">
+                                <figcaption>
+                                    <h2><i>{{ result.name }}<span>{{ result.price|floatformat:2 }}$</span>
+                                    {% if result.present %}<small style="color:lightgreen;">available</small>
+                                        {% else %}<small style="color:red;">unavailable</small>{% endif %}</i></h2>
+                                </figcaption>
+                            </figure>
+                        </a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </section>
+</section>
+{% endif %}
+
+{% endblock content %}

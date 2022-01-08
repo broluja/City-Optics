@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}AllProducts{% endblock title %}
+
+{% block content %}
+
+{% include 'navbar.html' %}
+{% include 'hero.html' %}
+
+
+<br><br>
+<div class="container">
+<h3>You can go through our palette of products and items we have currently in our Store.
+                    Feel free to experiment and do contact us for every question or suggestion you may have.
+                    Enjoy.</h3>
+    </div><br>
+
+<section id="testimonials" class="tm-section-pad-top tm-parallax-2" style="padding-top:15px;">
+    <div class="container tm-testimonials-content">
+        <div class="row">
+            <div class="col-lg-12 tm-content-box">
+                <h2 class="text-white text-center mb-4 tm-section-title">Products</h2>
+                <p class="mx-auto tm-section-desc text-center">
+                    Thanks for visiting
+                </p>
+                <div class="mx-auto tm-gallery-container tm-gallery-container-2">
+                    <div class="tm-testimonials-carousel">
+                        {% for product in products %}
+                        <figure class="tm-testimonial-item" >
+                            <img src="{{ product.image.url }}" alt="Image" class="img-fluid mx-auto" style="width:233px; height:200px;">
+                            <blockquote>{{ product.name }} - {{ product.description|truncatechars:44 }}
+                            </blockquote>
+                            <figcaption>Current price: <strong>{{ product.price|floatformat:2 }}$</strong></figcaption>
+                            <a href="{% url 'product_details' product.id %}" style="color:lightgreen;">Details</a>
+                        </figure>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}

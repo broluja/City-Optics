@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Appointments{% endblock title %}
+
+{% block content %}
+
+{% include 'navbar.html' %}
+{% include 'hero.html' %}
+
+<div class="container">
+    {% if name %}
+    <div class="container">
+            <br><br>
+            <h1>Hello {{name}}</h1>
+            <h1>Your request for an Appointment is posted. We `ll contact you as soon as possible for confirmation
+            of your date and time.</h1>
+            <small>Thank you and see you soon.</small>
+            <br><br>
+        {% else %}
+        <br><br>
+        <h2>Please fill out the form, leave your contact, and we will call you back with the Confirmation
+            as soon as possible. Feel free to send us any question or suggestion you have or
+            just, if you prefer, you can contact us via email or phone number provided below.
+        </h2>
+        <br><br>
+        {% endif %}
+    </div>
+</div>
+<section id="contact" class="tm-section-pad-top tm-parallax-2">
+    <div class="container tm-container-contact">
+        <div class="row">
+            <div class="text-center col-12">
+                <h2 class="tm-section-title mb-4">Make an Appointment</h2>
+                <small style="color:lightgreen;">Your data is safe with us.</small>
+                <br><br>
+            </div>
+
+            <div class="col-sm-12 col-md-6 mt-5">
+                <form action="{% url 'appointment' %}" method="POST">
+                    {% csrf_token %}
+                    <input type="date" min="2020-01-02" max="2030-01-02" class="tm-input" placeholder="Choose day" name="day">
+                    <select id="hours" name="hours" class="tm-input" required>
+                        <option value="">Choose Hour</option>
+                        {% for hour in hours %}
+                        <option value="{{hour}}" style="color:gray;">{{hour}}</option>
+                        {% endfor %}
+                    </select>
+                    <input id="name" name="name" type="text" placeholder="Your Name" class="tm-input" required/>
+                    <input id="phone" name="phone" type="tel" placeholder="Your Phone" class="tm-input" required/>
+                    <textarea id="message" name="message" rows="8" placeholder="Message" class="tm-input"></textarea>
+                    <button type="submit" class="btn tm-btn-submit btn-primary">Submit</button>
+                </form>
+            </div>
+
+            <div class="col-sm-12 col-md-6 mt-5">
+                <div class="contact-item">
+                    <a rel="nofollow" href="mailto:olujic.branko@gmail.com" class="item-link" target="_blank">
+                        <i class="far fa-2x fa-envelope mr-4"></i>
+                        <span class="mb-0">olujic.branko@gmail.com</span>
+                    </a>
+                </div>
+
+                <div class="contact-item">
+                    <a rel="nofollow"
+                       href="https://www.google.com/maps/place/%D0%94%D0%B8%D0%BC%D0%B8%D1%82%D1%80%D0%B8%D1%98%D0%B0+%D0%9A%D0%BE%D1%82%D1%83%D1%80%D0%BE%D0%B2%D0%B8%D1%9B%D0%B0+16,+%D0%91%D0%B5%D0%BE%D0%B3%D1%80%D0%B0%D0%B4/@44.7456824,20.4474261,17z/data=!3m1!4b1!4m5!3m4!1s0x475a7199058490e9:0x84e8690253bdce74!8m2!3d44.7456824!4d20.4496148"
+                       class="item-link" target="_blank">
+                        <i class="fas fa-2x fa-map-marker-alt mr-4"></i>
+                        <span class="mb-0">Our Location</span>
+                    </a>
+                </div>
+
+                <div class="contact-item">
+                    <a rel="nofollow" href="tel:+38164 2521241" class="item-link">
+                        <i class="fas fa-2x fa-phone-square mr-4"></i>
+                        <span class="mb-0">+38164 2521241</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}
