@@ -1,5 +1,16 @@
 from django.db import models
+from django.db.models import Q
 from PIL import Image
+
+
+class ProductManager(models.Manager):
+
+    def search(self, query):
+        if query is None or query == "":
+            return self.get_queryset().none()
+        lookups = Q(name__icontains=query) | Q(description__icontains=query)
+        queryset = self.filter(lookups)
+        return queryset
 
 
 class Product(models.Model):
@@ -24,6 +35,8 @@ class Product(models.Model):
 
     def get_absolute_url(self):
         return f"/product/{self.id}"
+
+    objects = ProductManager()
 
 
 class Order(models.Model):

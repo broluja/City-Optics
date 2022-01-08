@@ -141,7 +141,7 @@ def order_specific(request, pk):
 def city_optics(request):
     if request.method == "POST":
         searched_item = request.POST["searcher"]
-        search_result = Product.objects.filter(Q(name__contains=searched_item) | Q(description__contains=searched_item))
+        search_result = Product.objects.search(searched_item)
         context = {'results': search_result, 'object': 'Search Results', 'searched_item': searched_item}
         return render(request, 'products/site_index.html', context)
     return render(request, 'products/site_index.html', {'object': 'City Optics Main'})
