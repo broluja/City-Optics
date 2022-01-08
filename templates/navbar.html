@@ -16,12 +16,12 @@
                     </li>
                  </div>
 
-                <div class="col-2">
+                <div class="col-1">
                     <li class="nav-item">
                     <a class="nav-link tm-nav-link" href="{% url 'products' %}">Products</a>
                     </li>
                 </div>
-                <div class="col-2">
+                <div class="col-1">
                     <li class="nav-item">
                     <a class="nav-link tm-nav-link" href="{% url 'order' %}">Orders</a>
                     </li>
@@ -30,6 +30,11 @@
                 <li class="nav-item">
                 <a class="nav-link tm-nav-link" href="{% url 'appointment' %}">Appointments</a>
                 </li>
+                </div>
+                <div class="col-2">
+                    <li class="nav-item">
+                    <a class="nav-link tm-nav-link" href="{% url 'register' %}">Register</a>
+                    </li>
                 </div>
                 {% if user.is_superuser %}
                 <div class="col-1">
@@ -42,7 +47,7 @@
                     <a class="nav-link tm-nav-link" href="{% url 'schedules' %}">Schedule</a>
                     </li>
                 </div>
-                <div class="col-1 ml-auto">
+                <div class="col-2">
                     <a class="nav-link tm-nav-link" href="{% url 'admin:index' %}">Admin</a>
                 </div>
                 {% endif %}

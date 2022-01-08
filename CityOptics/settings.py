@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     # Local APPs
     'products.apps.ProductsConfig',
     'appointments.apps.AppointmentsConfig',
+    'accounts.apps.AccountsConfig',
     # Third party APPs
     'crispy_forms',
     'rest_framework',

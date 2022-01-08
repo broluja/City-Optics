@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}Register{% endblock title %}
+
+{% block content %}
+{% include 'navbar.html' %}
+<br><br><br>
+<div class="container tm-container-contact">
+    <div class="row">
+        <div class="text-center col-12">
+            <h2 class="tm-section-title mb-4">Register as User</h2>
+            <p class="mb-5">
+                Use form below to register as our Customer!
+            </p><br>
+        </div>
+
+        <div class="col-sm-12 col-md-6">
+            <form method="POST" enctype='multipart/form-data'>
+                {% csrf_token %}
+                {{ form|crispy }}
+             <input type="submit" class="btn tm-btn-submit" value="Create">
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
