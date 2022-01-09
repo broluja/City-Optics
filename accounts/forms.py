@@ -2,6 +2,8 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
+from .models import Customer
+
 
 class CustomerCreationForm(UserCreationForm):
     first_name = forms.TextInput()
@@ -27,3 +29,8 @@ class CustomerCreationForm(UserCreationForm):
                 attrs={'class': 'form-control form-control-lg mt-3 mb-3', 'placeholder': 'Email Address'}),
         }
 
+
+class CustomerUpdateForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ('first_name', 'last_name', 'username', 'email')

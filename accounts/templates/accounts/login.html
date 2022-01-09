@@ -10,9 +10,9 @@
 <div class="container tm-container-contact">
     <div class="row">
         <div class="text-center col-12">
-            <h2 class="tm-section-title mb-2">Register as Customer</h2>
+            <h2 class="tm-section-title mb-2">Log IN</h2>
             <p class="mb-4">
-                Fill out the form and submit
+                Fill out the form and login
             </p>
         </div>
 
@@ -20,7 +20,7 @@
             <form method="POST" enctype='multipart/form-data'>
                 {% csrf_token %}
                 {{ form|crispy }}
-             <input type="submit" class="btn tm-btn-submit" value="Submit">
+             <input type="submit" class="btn tm-btn-submit" value="Login">
             </form>
         </div>
     </div>

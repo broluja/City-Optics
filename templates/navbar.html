@@ -1,13 +1,13 @@
 
 <div class="container-fluid">
-    <div class="row no-gutters">
+    <div class="row">
         <nav class="navbar navbar-expand-md tm-navbar" style="background:#2162ad;">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <i class="fas fa-bars navbar-toggler-icon"></i>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                 <div class="col-3 mr-auto">
+                 <div class="col-3">
                     <li class="nav-item">
                         <form method="POST" action="{% url 'city-optics' %}">
                         {% csrf_token %}
@@ -16,39 +16,70 @@
                     </li>
                  </div>
 
-                <div class="col-1">
-                    <li class="nav-item">
-                    <a class="nav-link tm-nav-link" href="{% url 'products' %}">Products</a>
-                    </li>
+                <div class="col-6">
+                    <div class="row">
+                        <div class="col">
+                        <li class="nav-item">
+                        <a class="nav-link tm-nav-link" href="{% url 'products' %}">Products</a>
+                        </li>
+                        </div>
+
+                        <div class="col">
+                        <li class="nav-item">
+                        <a class="nav-link tm-nav-link" href="{% url 'order' %}">Orders</a>
+                        </li>
+                        </div>
+
+                        <div class="col">
+                        <li class="nav-item">
+                        <a class="nav-link tm-nav-link" href="{% url 'appointment' %}">Appointments</a>
+                        </li>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-1">
-                    <li class="nav-item">
-                    <a class="nav-link tm-nav-link" href="{% url 'order' %}">Orders</a>
-                    </li>
-                </div>
+                {% if request.user.is_anonymous %}
                 <div class="col-2">
-                <li class="nav-item">
-                <a class="nav-link tm-nav-link" href="{% url 'appointment' %}">Appointments</a>
-                </li>
+                    <div class="row">
+                        <div class="col">
+                        <li class="nav-item">
+                        <a class="nav-link tm-nav-link" href="{% url 'register' %}">Register</a>
+                        </li>
+                        </div>
+
+                        <div class="col">
+                        <li class="nav-item">
+                        <a class="nav-link tm-nav-link" href="{% url 'login' %}">Login</a>
+                        </li>
+                        </div>
+                    </div>
                 </div>
+                {% else %}
                 <div class="col-2">
-                    <li class="nav-item">
-                    <a class="nav-link tm-nav-link" href="{% url 'register' %}">Register</a>
-                    </li>
+                    <div class="row">
+                        <div class="col">
+                            <li class="nav-item">
+                            <a class="nav-link tm-nav-link" href="{% url 'profile' request.user.customer.slug %}">{{request.user}}</a>
+                            </li>
+                        </div>
+                        <div class="col">
+                            <li class="nav-item">
+                            <a class="nav-link tm-nav-link" href="{% url 'logout' %}">Logout</a>
+                            </li>
+                        </div>
+                    </div>
                 </div>
+                {% endif %}
+
                 {% if user.is_superuser %}
                 <div class="col-1">
-                    <li class="nav-item">
-                    <a class="nav-link tm-nav-link" href="{% url 'create' %}">Create</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" style='color:white;' href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Admin</a>
+                          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="nav-link tm-nav-link" href="{% url 'create' %}" style='color:black;'>Create</a></li>
+                            <li><a class="nav-link tm-nav-link" href="{% url 'schedules' %}" style='color:black;'>Schedule</a></li>
+                            <li><a class="nav-link tm-nav-link" href="{% url 'admin:index' %}" style='color:black;'>Admin Panel</a></li>
+                          </ul>
                     </li>
-                </div>
-                <div class="col-1">
-                    <li class="nav-item">
-                    <a class="nav-link tm-nav-link" href="{% url 'schedules' %}">Schedule</a>
-                    </li>
-                </div>
-                <div class="col-2">
-                    <a class="nav-link tm-nav-link" href="{% url 'admin:index' %}">Admin</a>
                 </div>
                 {% endif %}
             </div>

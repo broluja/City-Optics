@@ -22,9 +22,26 @@
     {% if searched_item %}
     <h3>No results for '{{ searched_item }}'</h3>
     {% else %}
-    <h1>Welcome to the CityOptics</h1>
-    <small>Thanks for visiting.</small>
-    <small>Let`s start!</small>
+    <div class="row">
+        <div class="col-9">
+            <h1>Welcome to the CityOptics</h1>
+            <small>Thanks for visiting.</small>
+            <small>Let`s start!</small>
+        </div>
+        {% if request.user.is_anonymous %}
+        <div class="col-3">
+            <p>If you still haven`t registered as a Customer maybe you should consider it.</p>
+            <small>With registration you will gain coupon code, 5% discount for the first order you made.</small>
+            <small>Follow this </small><a href="{% url 'register' %}">Link</a>
+        </div>
+        {% else %}
+        <div class="col-3">
+            <p>We hope you found something you need and that you used your discount code.</p>
+            <small>Check out our new products!!</small>
+            <small>Follow this </small><a href="{% url 'all_products' %}">Link</a>
+        </div>
+        {% endif %}
+    </div>
     {% endif %}
 </div>
 {% endif %}

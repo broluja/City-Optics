@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}Overview{% endblock title %}
+
+{% block content %}
+
+{% include 'navbar.html' %}
+{% include 'hero.html' %}
+
+<hr style="width: 70%;"><br>
+
+<div class="container">
+    <div class="row">
+        <div class="col-7">
+            <h1>Welcome {{customer.user.username|upper}}</h1>
+            <small>Thanks for registering.</small>
+        </div>
+
+        {% if customer.user.id == request.user.id %}
+        <div class="col-5">
+            <div class="container">
+                <h5>Your coupon code is {{customer.code}}</h5>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+    <div class="row">
+        <div class="col-7">
+            <small>Date joined: {{customer.created_on}}</small>
+        </div>
+        <div class="col-5">
+            {% if customer.discount_used %}
+            <small>You have used your coupon code</small>
+            {% else %}
+            <small>You still have not used your coupon code. Check out our </small><a href="{% url 'all_products' %}">Products</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+<hr style="width: 70%;"/><br/><br/>
+{% if customer.user.id == request.user.id %}
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <form method="POST">
+                {% csrf_token %}
+                {{form|crispy}}
+                <input type="submit" class="btn tm-btn-submit" value="Update">
+            </form>
+        </div>
+    </div>
+</div>
+<hr/><br/>
+{% endif %}
+
+{% endblock content %}
