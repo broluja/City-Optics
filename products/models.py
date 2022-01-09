@@ -46,6 +46,7 @@ class Order(models.Model):
     email = models.EmailField(blank=True, null=True)
     message = models.TextField(blank=True, null=True, max_length=555)
     is_shipped = models.BooleanField(default=False)
+    discount_approved = models.BooleanField(default=False)
 
     def __str__(self):
         return f"{self.product}"

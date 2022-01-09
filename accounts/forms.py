@@ -15,7 +15,6 @@ class CustomerCreationForm(UserCreationForm):
             'last_name': '',
             'username': '',
             'email': '',
-            'phone': ''
         }
         widgets = {
             'first_name': forms.TextInput(
@@ -26,7 +25,5 @@ class CustomerCreationForm(UserCreationForm):
                 attrs={'class': 'form-control mt-3 mb-3', 'placeholder': 'Username'}),
             'email': forms.TextInput(
                 attrs={'class': 'form-control form-control-lg mt-3 mb-3', 'placeholder': 'Email Address'}),
-            'phone': forms.TextInput(attrs={'class': 'form-control mt-3 mb-3', 'placeholder': 'Phone Number'}),
-
         }
 

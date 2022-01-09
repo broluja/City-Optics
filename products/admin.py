@@ -10,7 +10,7 @@ class ProductAdmin(admin.ModelAdmin):
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ('__str__', 'name', 'phone', 'is_shipped')
+    list_display = ('__str__', 'name', 'phone', 'is_shipped', 'discount_approved')
     list_editable = ('is_shipped', )
     search_fields = ('product', )
     list_filter = ('product', )

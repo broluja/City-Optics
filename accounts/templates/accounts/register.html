@@ -10,17 +10,17 @@
 <div class="container tm-container-contact">
     <div class="row">
         <div class="text-center col-12">
-            <h2 class="tm-section-title mb-4">Register as User</h2>
-            <p class="mb-5">
-                Use form below to register as our Customer!
-            </p><br>
+            <h2 class="tm-section-title mb-2">Register as Customer</h2>
+            <p class="mb-4">
+                Fill out the form and register
+            </p>
         </div>
 
         <div class="col-sm-12 col-md-6">
             <form method="POST" enctype='multipart/form-data'>
                 {% csrf_token %}
                 {{ form|crispy }}
-             <input type="submit" class="btn tm-btn-submit" value="Create">
+             <input type="submit" class="btn tm-btn-submit" value="Submit">
             </form>
         </div>
     </div>

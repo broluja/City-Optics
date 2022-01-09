@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect
 from django.http import Http404
-from django.db.models import Q
+from django.contrib import messages
 from django.contrib.auth.decorators import user_passes_test
 from django.views.generic import ListView
 from django.core.exceptions import ObjectDoesNotExist
+from accounts.models import Coupon
 
 
 from .models import Message, Product, Order
@@ -81,6 +82,7 @@ def order(request):
             name = request.POST['name']
             email = request.POST['email']
             message = request.POST['message']
+            code = request.POST['coupon']
             context = {
                 "product": product,
                 "name": name,
@@ -92,8 +94,27 @@ def order(request):
             }
             ordered_product = Product.objects.get(name=product)
             new_order = Order(product=ordered_product, name=name, phone=phone, email=email, message=message)
-            new_order.save()
-            return render(request, 'products/order.html', context)
+
+            if code == "":
+                new_order.save()
+                return render(request, 'products/order.html', context)
+            else:
+                if request.user.is_authenticated and str(request.user.customer.code) == code:
+                    try:
+                        Coupon.objects.create(code=code, user=request.user.customer)
+                        new_order.discount_approved = True
+                        new_order.save()
+                        request.user.customer.discount_used = True
+                        request.user.customer.save()
+                        messages.success(request, 'Your coupon was accepted. 5% discount applied')
+                        return render(request, 'products/order.html', context)
+                    except:
+                        messages.warning(request, 'Your coupon was already used. Order is rejected.')
+                        return redirect('city-optics')
+
+                messages.warning(request, 'Your coupon code does not exist. Order is rejected.')
+                return redirect('city-optics')
+
         except ObjectDoesNotExist:
             products = Product.objects.all()
             get_context = {"products": products, "object": "Unavailable Product - Check our Products"}
