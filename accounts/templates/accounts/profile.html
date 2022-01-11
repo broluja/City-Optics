@@ -42,13 +42,18 @@
 <hr style="width: 70%;"/><br/><br/>
 {% if customer.user.id == request.user.id %}
 <div class="container">
+    <p>Update your profile:</p>
     <div class="row">
-        <div class="col">
+        <div class="col-7">
             <form method="POST">
                 {% csrf_token %}
                 {{form|crispy}}
                 <input type="submit" class="btn tm-btn-submit" value="Update">
             </form>
+        </div>
+        <div class="col-5">
+            <center><p>My Orders: </p></center>
+            <center><p>My Appointments: </p></center>
         </div>
     </div>
 </div>

@@ -25,8 +25,8 @@ class Product(models.Model):
     def __str__(self):
         return f"{self.name}: ${self.price}"
 
-    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
-        super(Product, self).save()
+    def save(self, *args, **kwargs):
+        super(Product, self).save(*args, **kwargs)
         img = Image.open(self.image.path)
         if img.height > 1000 or img.width > 800:
             output_size = (800, 1000)
