@@ -42,11 +42,14 @@ def profile(request, slug):
         form = CustomerUpdateForm(request.POST, instance=request.user)
         if form.is_valid():
             form.save()
-            print(form.cleaned_data)
             messages.success(request, 'Profile Updated')
-            return render(request, 'accounts/profile.html', {'form': form})
+            context = {
+                'object': 'Profile',
+                'form': CustomerUpdateForm(instance=request.user),
+                'customer': request.user.customer
+            }
+            return render(request, 'accounts/profile.html', context)
         else:
-            print(form.cleaned_data)
             return redirect('city-optics')
 
     else:
@@ -63,3 +66,4 @@ def profile(request, slug):
             raise Http404
 
 
+# TODO make API view for GETTING Coupons and Customers, possible for POSTING new Coupons
