@@ -20,6 +20,7 @@ def register(request):
         form.save()
         messages.success(request, 'You successfully Registered. Discount code is sent to your email. Log IN')
         return redirect('login')
+
     else:
         form = CustomerCreationForm(request.POST)
         context = {'form': form}
