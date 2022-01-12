@@ -42,18 +42,47 @@
 <hr style="width: 70%;"/><br/><br/>
 {% if customer.user.id == request.user.id %}
 <div class="container">
-    <p>Update your profile:</p>
     <div class="row">
-        <div class="col-7">
+        <div class="col-6">
+            <p>Update your profile:</p>
             <form method="POST">
                 {% csrf_token %}
                 {{form|crispy}}
-                <input type="submit" class="btn tm-btn-submit" value="Update">
+                <input type="submit" class="btn tm-btn-submit" value="Update" style="background:#2e5078;">
             </form>
         </div>
-        <div class="col-5">
+        <div class="col-5 ml-auto">
             <center><p>My Orders: </p></center>
+            <div class="list-group mb-5">
+                <a href="{% url 'order' %}" class="list-group-item list-group-item-action active"
+                   aria-current="true" style="background:#2e5078;">
+                    Go to Orders
+                </a>
+                {% for order in customer.order_set.all %}
+                <a href="{% url 'product_details' order.product.pk %}" type="button" class="list-group-item list-group-item-action">{{ order.product.name }}
+                    <cite {% if order.discount_approved %}style="text-decoration:line-through;" {% endif %}>${{order.product.price}}</cite>
+                    | </a><a type="button" class="list-group-item list-group-item-action">
+                {% if order.is_shipped %}It is Shipped | {% endif %}{% if order.discount_approved %}
+                You applied coupon on this Order, new price ${{ order.new_price|floatformat:2 }}{% else %}You had no
+                discount{% endif %}</a>
+                <hr>
+                {% endfor %}
+            </div>
             <center><p>My Appointments: </p></center>
+            <div class="list-group mb-5">
+                <a href="{% url 'appointment' %}" class="list-group-item list-group-item-action active"
+                   aria-current="true" style="background:#2e5078;">
+                    Go to Appointments
+                </a>
+                {% for appointment in customer.appointment_set.all %}
+                <button type="button" class="list-group-item list-group-item-action">Requested appointment on:
+                    {{ appointment.date }}, {{appointment.hour}} | {% if appointment.is_confirmed %}Your Appointment is
+                    confirmed on
+                    {{ appointment.date}}, {{appointment.hour}}{% else %}Your appointment is not confirmed yet.
+                    {% endif %}
+                </button>
+                {% endfor %}
+            </div>
         </div>
     </div>
 </div>

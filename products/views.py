@@ -6,7 +6,6 @@ from django.views.generic import ListView
 from django.core.exceptions import ObjectDoesNotExist
 from accounts.models import Coupon
 
-
 from .models import Message, Product, Order
 from .forms import ProductForm
 from .serializers import ProductSerializer, OrderSerializer, MessageSerializer
@@ -83,6 +82,10 @@ def order(request):
             email = request.POST['email']
             message = request.POST['message']
             code = request.POST['coupon']
+            customer = None
+            if request.user.is_authenticated:
+                customer = request.user.customer
+
             context = {
                 "product": product,
                 "name": name,
@@ -93,7 +96,8 @@ def order(request):
                 "products": products,
             }
             ordered_product = Product.objects.get(name=product)
-            new_order = Order(product=ordered_product, name=name, phone=phone, email=email, message=message)
+            new_order = Order(product=ordered_product, name=name, phone=phone, email=email, message=message,
+                              customer=customer)
 
             if code == "":
                 new_order.save()

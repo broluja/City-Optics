@@ -1,6 +1,8 @@
+from PIL import Image
+
 from django.db import models
 from django.db.models import Q
-from PIL import Image
+from accounts.models import Customer
 
 
 class ProductManager(models.Manager):
@@ -47,9 +49,16 @@ class Order(models.Model):
     message = models.TextField(blank=True, null=True, max_length=555)
     is_shipped = models.BooleanField(default=False)
     discount_approved = models.BooleanField(default=False)
+    customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
         return f"{self.product}"
+
+    def new_price(self):
+        if self.discount_approved:
+            new_price = self.product.price * 0.95
+            return new_price
+        return self.product.price
 
 
 class Message(models.Model):

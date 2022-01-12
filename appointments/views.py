@@ -31,6 +31,9 @@ def appointment(request):
     message = request.POST.get('message')
     hours = Appointment.HOURS
     day = request.POST.get('day')
+    customer = None
+    if request.user.is_authenticated:
+        customer = request.user.customer
 
     for pair in hours:
         value, key = pair
@@ -38,7 +41,7 @@ def appointment(request):
             hour = value
             break
 
-    new_appointment = Appointment(name=name, phone=phone, hour=hour, message=message, date=day)
+    new_appointment = Appointment(name=name, phone=phone, hour=hour, message=message, date=day, customer=customer)
     new_appointment.save()
     hours = [hour[1] for hour in hours]
     context = {

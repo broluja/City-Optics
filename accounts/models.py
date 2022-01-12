@@ -12,7 +12,6 @@ class Customer(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
     discount_used = models.BooleanField(default=False)
     code = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
-    # TODO: Bind Customer/User with Orders and Appointments, should be done on Order and Appointment side
 
     def __str__(self):
         return self.user.username

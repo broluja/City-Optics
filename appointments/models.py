@@ -1,4 +1,5 @@
 from django.db import models
+from accounts.models import Customer
 
 
 class Appointment(models.Model):
@@ -20,6 +21,7 @@ class Appointment(models.Model):
     message = models.TextField(blank=True, null=True)
     is_confirmed = models.BooleanField(default=False)
     date = models.DateField()
+    customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, blank=True, null=True)
 
     def __str__(self):
         return f'{self.name} on {self.date}, {self.hour}'
