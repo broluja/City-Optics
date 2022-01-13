@@ -21,7 +21,7 @@
         {% if customer.user.id == request.user.id %}
         <div class="col-5">
             <div class="container">
-                <h5>Your coupon code is {{customer.code}}</h5>
+                <h5>Your coupon code is: </h5><p>{{customer.code}}</p>
             </div>
         </div>
         {% endif %}
