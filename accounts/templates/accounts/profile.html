@@ -2,7 +2,7 @@
 {% load static %}
 {% load crispy_forms_tags %}
 
-{% block title %}Overview{% endblock title %}
+{% block title %}Profile{% endblock title %}
 
 {% block content %}
 
@@ -82,6 +82,25 @@
                     {% endif %}
                 </button>
                 {% endfor %}
+            </div>
+             <center><p>My Testimony: </p></center>
+            <div class="list-group mb-5">
+                {% if customer.testimony %}
+                <a href="{% url 'edit_testimony' customer.slug %}" class="list-group-item list-group-item-action active"
+                   aria-current="true" style="background:#2e5078;">
+                    Edit my Testimony
+                </a>
+                {% else %}
+                <a href="{% url 'testimony' %}" class="list-group-item list-group-item-action active"
+                   aria-current="true" style="background:#2e5078;">
+                    Post Testimony
+                </a>
+                {% endif %}
+
+                <button type="button" class="list-group-item list-group-item-action">
+                    {{customer.testimony.comment}}
+                </button>
+
             </div>
         </div>
     </div>

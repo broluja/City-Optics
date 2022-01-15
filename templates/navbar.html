@@ -16,7 +16,7 @@
                     </li>
                  </div>
 
-                <div class="col-6">
+                <div class="col-4">
                     <div class="row">
                         <div class="col">
                         <li class="nav-item">
@@ -38,7 +38,7 @@
                     </div>
                 </div>
                 {% if request.user.is_anonymous %}
-                <div class="col-2">
+                <div class="col-3 ml-auto">
                     <div class="row">
                         <div class="col">
                         <li class="nav-item">
@@ -54,32 +54,34 @@
                     </div>
                 </div>
                 {% else %}
-                <div class="col-2">
-                    <div class="row">
-                        <div class="col">
+                <div class="col-3 ml-auto">
+                    <div class="row no-gutter">
+                        {% if user.is_superuser %}
+                        <div class="col-3 ml-auto">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" style='color:white;' href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Admin</a>
+                                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><a class="nav-link tm-nav-link" href="{% url 'create' %}" style='color:black;'>Create</a></li>
+                                    <li><a class="nav-link tm-nav-link" href="{% url 'schedules' %}" style='color:black;'>Schedule</a></li>
+                                      <li><a class="nav-link tm-nav-link" href="{% url 'profile' request.user.customer.slug %}" style='color:black;'>Profile</a></li>
+                                    <li><a class="nav-link tm-nav-link" href="{% url 'admin:index' %}" style='color:black;'>Admin Panel</a></li>
+
+                                  </ul>
+                            </li>
+                        </div>
+                        {% else %}
+                        <div class="col-3 ml-auto">
                             <li class="nav-item">
                             <a class="nav-link tm-nav-link" href="{% url 'profile' request.user.customer.slug %}">{{request.user}}</a>
                             </li>
                         </div>
-                        <div class="col">
+                        {% endif %}
+                        <div class="col-4 ml-auto">
                             <li class="nav-item">
                             <a class="nav-link tm-nav-link" href="{% url 'logout' %}">Logout</a>
                             </li>
                         </div>
                     </div>
-                </div>
-                {% endif %}
-
-                {% if user.is_superuser %}
-                <div class="col-1">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" style='color:white;' href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Admin</a>
-                          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="nav-link tm-nav-link" href="{% url 'create' %}" style='color:black;'>Create</a></li>
-                            <li><a class="nav-link tm-nav-link" href="{% url 'schedules' %}" style='color:black;'>Schedule</a></li>
-                            <li><a class="nav-link tm-nav-link" href="{% url 'admin:index' %}" style='color:black;'>Admin Panel</a></li>
-                          </ul>
-                    </li>
                 </div>
                 {% endif %}
             </div>

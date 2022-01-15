@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
-from .models import Customer
+from .models import Testimony
 
 
 class CustomerCreationForm(UserCreationForm):
@@ -34,3 +34,22 @@ class CustomerUpdateForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ('first_name', 'last_name', 'username', 'email')
+
+
+class TestimonyForm(forms.ModelForm):
+    agree = forms.BooleanField(
+                        required=True,
+                        label='CityOptics can post my comment and username on Home Page and make it public'
+                               )
+    image = forms.ImageField(label='Optional Image for Home Page', required=False)
+
+    class Meta:
+        model = Testimony
+        fields = ('comment', 'image', 'agree')
+
+        labels = {
+            'comment': 'My Testimony',
+        }
+        widgets = {
+            'comment': forms.Textarea(
+                attrs={'class': 'form-control form-control-lg mt-3 mb-3', 'placeholder': 'Comment here...'})}

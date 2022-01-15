@@ -31,3 +31,18 @@ class Coupon(models.Model):
 
     def __str__(self):
         return self.code
+
+
+class Testimony(models.Model):
+    customer = models.OneToOneField(Customer, on_delete=models.CASCADE)
+    comment = models.TextField(max_length=555)
+    date_created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+    approved = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.customer.user.username
+
+    class Meta:
+        verbose_name_plural = 'Testimonies'
+

@@ -64,9 +64,7 @@
                         and get fast and appropriate care for your eyes using modern equipment and latest technologies.
                 </div>
             </div>
-
-        </div><!-- first row -->
-
+        </div>
         <div class="row tm-content-box"><!-- second row -->
             <div class="col-lg-1">
                 <i class="far fa-3x fa-chart-bar text-center tm-icon"></i>
@@ -93,9 +91,7 @@
                         glance of an eye. Fill out the form <a href="#contact">below.</a>
                 </div>
             </div>
-
-        </div><!-- second row -->
-
+        </div>
         <div class="row tm-content-box"><!-- third row -->
             <div class="col-lg-1">
                 <i class="fas fa-3x fa-fingerprint text-center tm-icon"></i>
@@ -131,9 +127,7 @@
                     </div>
                 </div>
             </div>
-
-        </div><!-- third row -->
-
+        </div>
     </div>
 
 </section>
@@ -147,40 +141,20 @@
                     Read the testimonials from our Customers. Find out why are they satisfied with our services
                     and products. Let them speak instead us.
                 </p>
-                <center><a href="#contact" style="text-transform:capitalize; text-shadow: 4px 4px 5px red;">Leave your own testimony</a></center>
+                <p class="mx-auto tm-section-desc text-center">If you are too our registered Customer,
+                    <a href="{% url 'testimony' %}">leave your own testimony</a></p>
+
                 <div class="mx-auto tm-gallery-container tm-gallery-container-2">
                     <div class="tm-testimonials-carousel">
+                        {% for testimony in testimonials %}
                         <figure class="tm-testimonial-item">
                             <img src="{% static 'img/testimonial-img-01.jpg' %}" alt="Image" class="img-fluid mx-auto">
-                            <blockquote>This background image includes a semi-transparent overlay layer. This section
-                                also has a parallax image effect.
+                            <blockquote>{{testimony.comment}}
                             </blockquote>
-                            <figcaption>Catherine Win (Designer)</figcaption>
+                            <figcaption><small>{{testimony.customer}}, posted on {{testimony.date_created}}</small>
+                            </figcaption>
                         </figure>
-
-                        <figure class="tm-testimonial-item">
-                            <img src="{% static 'img/testimonial-img-02.jpg' %}" alt="Image" class="img-fluid mx-auto">
-                            <blockquote>Testimonial section comes with carousel items. You can use Infinite Loop HTML
-                                CSS template for your websites.
-                            </blockquote>
-                            <figcaption>Dual Rocker (CEO)</figcaption>
-                        </figure>
-
-                        <figure class="tm-testimonial-item">
-                            <img src="{% static 'img/testimonial-img-03.jpg' %}" alt="Image" class="img-fluid mx-auto">
-                            <blockquote>Nulla finibus ligula nec tortor convallis tincidunt. Interdum et malesuada fames
-                                ac ante ipsum primis in faucibus.
-                            </blockquote>
-                            <figcaption>Sandar Soft (Marketing)</figcaption>
-                        </figure>
-
-                        <figure class="tm-testimonial-item">
-                            <img src="{% static 'img/testimonial-img-04.jpg' %}" alt="Image" class="img-fluid mx-auto">
-                            <blockquote>Curabitur rutrum pharetra lobortis. Pellentesque vehicula, velit quis eleifend
-                                fermentum, erat arcu aliquet neque.
-                            </blockquote>
-                            <figcaption>Oliva Htoo (Designer)</figcaption>
-                        </figure>
+                        {% endfor %}
                     </div>
                 </div>
             </div>

@@ -7,6 +7,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from accounts.models import Coupon
 
 from .models import Message, Product, Order
+from accounts.models import Testimony
 from .forms import ProductForm
 from .serializers import ProductSerializer, OrderSerializer, MessageSerializer
 
@@ -36,7 +37,7 @@ def index(request):
         }
         return render(request, 'home.html', context)
     else:
-        testimonials = Message.objects.filter(is_for_front_page=True)
+        testimonials = Testimony.objects.filter(approved=True)
         context = {'testimonials': testimonials}
         return render(request, 'index.html', context)
 
