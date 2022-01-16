@@ -1,13 +1,13 @@
 from django.db.utils import IntegrityError
-
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from django.core.exceptions import ObjectDoesNotExist
-from django.contrib.auth.decorators import login_required
 
+# Custom APP imports
 from .forms import CustomerCreationForm, CustomerUpdateForm, TestimonyForm
 from .models import Customer, Coupon
 from .serializers import CustomerSerializer, CouponSerializer
@@ -88,7 +88,7 @@ def testify(request):
                 messages.warning(request, 'You are not registered Customer')
                 return redirect('city-optics')
             except IntegrityError:
-                messages.info(request, 'You already posted your testimony')
+                messages.info(request, 'You have already posted your testimony')
                 return redirect('profile', slug=request.user.customer.slug)
             messages.success(request, 'Your testimony has been sent to our Admins for verification.')
             return redirect('profile', slug=request.user.customer.slug)

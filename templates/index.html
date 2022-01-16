@@ -148,7 +148,7 @@
                     <div class="tm-testimonials-carousel">
                         {% for testimony in testimonials %}
                         <figure class="tm-testimonial-item">
-                            <img src="{% static 'img/testimonial-img-01.jpg' %}" alt="Image" class="img-fluid mx-auto">
+                            <img src="{{ testimony.image.url }}" alt="Image" class="img-fluid mx-auto">
                             <blockquote>{{testimony.comment}}
                             </blockquote>
                             <figcaption><small>{{testimony.customer}}, posted on {{testimony.date_created}}</small>

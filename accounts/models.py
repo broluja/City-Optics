@@ -1,4 +1,5 @@
 import uuid
+from PIL import Image
 
 from django.db import models
 from django.contrib.auth.models import User
@@ -39,6 +40,7 @@ class Testimony(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     approved = models.BooleanField(default=False)
+    image = models.ImageField(default='cat.jpg', upload_to='feedback_pics')
 
     def __str__(self):
         return self.customer.user.username

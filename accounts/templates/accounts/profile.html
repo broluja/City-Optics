@@ -83,17 +83,17 @@
                 </button>
                 {% endfor %}
             </div>
-             <center><p>My Testimony: </p></center>
+             <center><p>My Feedback: </p></center>
             <div class="list-group mb-5">
                 {% if customer.testimony %}
                 <a href="{% url 'edit_testimony' customer.slug %}" class="list-group-item list-group-item-action active"
                    aria-current="true" style="background:#2e5078;">
-                    Edit my Testimony
+                    Edit my Feedback
                 </a>
                 {% else %}
                 <a href="{% url 'testimony' %}" class="list-group-item list-group-item-action active"
                    aria-current="true" style="background:#2e5078;">
-                    Post Testimony
+                    Send us your Feedback
                 </a>
                 {% endif %}
 
