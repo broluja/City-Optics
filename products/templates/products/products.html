@@ -7,35 +7,44 @@
 
 {% include 'navbar.html' %}
 
-<section id="infinite" class="text-white tm-font-big tm-parallax">
-    <div class="text-center tm-hero-text-container">
-        <div class="tm-hero-text-container-inner">
-            <h2 class="tm-hero-title" style="margin-top:15px;">{{object|title}} Page</h2>
-            <p class="tm-hero-subtitle">
-                Back to the Home Page
+{% include 'hero.html' %}
+
+<!--<section id="infinite" class="text-white tm-font-big tm-parallax" style="height:600px;">-->
+<!--    <div class="text-center tm-hero-text-container">-->
+<!--        <div class="tm-hero-text-container-inner">-->
+<!--            <h2 class="tm-hero-title" style="margin-top:15px;">{{object|title}} Page</h2>-->
+<!--            <p class="tm-hero-subtitle">-->
+<!--                Back to the Home Page-->
+<!--            </p>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--     <div class="tm-next tm-intro-next">-->
+<!--        <a href="{% url 'index' %}"" class="text-center tm-down-arrow-link">-->
+<!--            <i class="fas fa-2x fa-arrow-left tm-down-arrow"></i>-->
+<!--        </a>-->
+<!--    </div>-->
+<!--</section>-->
+<div class="container">
+    <div class="row">
+        <div class="text-center col-12">
+            <h2 class="tm-text-primary tm-section-title mb-4 mt-4">Products</h2>
+            <p >
+                Below you can find our top products!
             </p>
+            <p>Hope you will find something that suits you. Enjoy</p>
+            <p class="mx-auto tm-section-desc">Complete list of all our <strong>products</strong> you can find <a href="{% url 'all_products' %}" style="font-size: 20px;">here</a></p>
+
+
+
         </div>
     </div>
-     <div class="tm-next tm-intro-next">
-        <a href="{% url 'index' %}"" class="text-center tm-down-arrow-link">
-            <i class="fas fa-2x fa-arrow-left tm-down-arrow"></i>
-        </a>
-    </div>
-</section>
+</div>
 
 
-<section id="gallery" class="tm-section-pad-top">
+
+<section id="contact" class="tm-section-pad-top">
     <div class="container tm-container-gallery">
-        <div class="row">
-            <div class="text-center col-12">
-                <h2 class="tm-text-primary tm-section-title mb-4">Products</h2>
-                <p class="mx-auto tm-section-desc">
-                    Below you can find our top products!
-                </p>
-                <p class="mx-auto tm-section-desc">Complete list of all our <strong>products</strong> you can find <a href="{% url 'all_products' %}" style="font-size: 20px;">here</a></p>
 
-            </div>
-        </div>
         <div class="row">
             <div class="col-12">
                 <div class="mx-auto tm-gallery-container">
