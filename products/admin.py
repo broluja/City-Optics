@@ -30,5 +30,5 @@ class OrderAdmin(admin.ModelAdmin):
 
 @admin.register(Message)
 class MessageAdmin(admin.ModelAdmin):
-    list_display = ('name', 'mail', 'text_message', 'is_for_front_page')
-    list_editable = ('is_for_front_page',)
+    list_display = ('__str__', 'mail', 'text_message', )
+

@@ -42,7 +42,6 @@ class TestimonyForm(forms.ModelForm):
                         required=True,
                         label='CityOptics can post my comment and username on Home Page and make it public'
                                )
-    image = forms.ImageField(label='Optional Image for Home Page', required=False)
 
     class Meta:
         model = Testimony
@@ -50,6 +49,7 @@ class TestimonyForm(forms.ModelForm):
 
         labels = {
             'comment': 'My Testimony',
+            'image': 'Choose an Optional Image'
         }
         widgets = {
             'comment': forms.Textarea(

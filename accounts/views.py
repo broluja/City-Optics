@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.http import Http404
 from django.core.exceptions import ObjectDoesNotExist
 
@@ -19,6 +19,9 @@ from rest_framework import status
 
 
 def register(request):
+    if request.user.is_authenticated:
+        messages.info(request, f'You are already registered and signed In as {request.user.customer}')
+        return redirect('profile', slug=request.user.customer.slug)
     if request.method != 'POST':
         form = CustomerCreationForm()
         context = {'form': form}
@@ -101,12 +104,14 @@ def testify(request):
         return render(request, 'accounts/testimony.html', context)
 
 
-@login_required
 def edit_testimony(request, slug):
+    customer = Customer.objects.get(slug=slug)
+    if request.user != customer.user:
+        raise Http404
     try:
         customer = Customer.objects.get(slug=slug)
         if request.method == 'POST':
-            form = TestimonyForm(request.POST, instance=customer.testimony)
+            form = TestimonyForm(request.POST, request.FILES, instance=customer.testimony)
             if form.is_valid():
                 testimony = form.save(commit=False)
                 testimony.approved = False

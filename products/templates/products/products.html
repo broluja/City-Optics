@@ -47,6 +47,9 @@
 
         <div class="row">
             <div class="col-12">
+                <center><p>This is just a part of products you can find here.</p></center>
+                  <center><p>If you find something that suits you, you can order it </p></center>
+                <center><p>following this <a href="{% url 'order' %}">Link</a></p></center>
                 <div class="mx-auto tm-gallery-container">
                     <div class="grid tm-gallery">
                         {% for product in products %}
@@ -63,6 +66,13 @@
                         {% endfor %}
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <center><p>If you register as a Customer you will receive one-off 5% discount.</p></center>
+                <center><p>Follow this <a href="{% url 'register' %}">Link</a> and register.</p></center>
+
             </div>
         </div>
     </div>

@@ -1,4 +1,5 @@
 from PIL import Image
+from datetime import datetime
 
 from django.db import models
 from django.db.models import Q
@@ -66,8 +67,7 @@ class Message(models.Model):
     mail = models.EmailField()
     phone = models.CharField(max_length=33, blank=True, null=True)
     text_message = models.TextField(max_length=555)
-    is_for_front_page = models.BooleanField(default=False)
     sent_on = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.name} wrote on {self.sent_on}"
+        return f'{self.name} wrote on {self.sent_on.strftime("%A, %d. %B %Y %I:%M%p")}'
