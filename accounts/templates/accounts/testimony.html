@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}Testimony{% endblock title %}
+
+{% block content %}
+{% include 'navbar.html' %}
+<br><br><br>
+<div class="container tm-container-contact">
+    <div class="row">
+        <div class="col">
+              <center><h2 class="tm-section-title mb-4">Write your testimony</h2></center>
+        </div>
+    </div><br>
+    <div class="row">
+        <div class="text-center col-7 mr-auto">
+            <h4 class="mb-4">
+                Fill out the form and submit
+            </h4>
+            <form method="POST" enctype='multipart/form-data'>
+                {% csrf_token %}
+                {{ form|crispy }}
+             <input type="submit" class="btn tm-btn-submit" value="Submit">
+            </form>
+        </div>
+
+        <div class="col-3 ml-auto">
+            <h4 class="mb-4">Write your impressions</h4>
+            <p>Leave us your impressions, suggestions and critics. After admin validation, it will be
+            posted on our front page.</p>
+        </div>
+        <div class="col-sm-12 col-md-6">
+
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

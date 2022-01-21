@@ -17,6 +17,7 @@ class Appointment(models.Model):
 
     name = models.CharField(max_length=150)
     phone = models.CharField(max_length=33)
+    email = models.EmailField(blank=True, null=True)
     hour = models.CharField(max_length=33, choices=HOURS)
     message = models.TextField(blank=True, null=True)
     is_confirmed = models.BooleanField(default=False)
@@ -24,5 +25,5 @@ class Appointment(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, blank=True, null=True)
 
     def __str__(self):
-        return f'{self.name} on {self.date}, {self.hour}'
+        return f'{self.name} requests for: {self.date}, {self.hour}'
 

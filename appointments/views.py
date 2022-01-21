@@ -26,6 +26,7 @@ def appointment(request):
         return render(request, 'appointments/appointment.html', context)
 
     name = request.POST.get('name')
+    email = request.POST.get('email')
     phone = request.POST.get('phone')
     hour = request.POST.get('hours')
     message = request.POST.get('message')
@@ -41,7 +42,8 @@ def appointment(request):
             hour = value
             break
 
-    new_appointment = Appointment(name=name, phone=phone, hour=hour, message=message, date=day, customer=customer)
+    new_appointment = Appointment(name=name, phone=phone, email=email, hour=hour, message=message, date=day,
+                                  customer=customer)
     new_appointment.save()
     hours = [hour[1] for hour in hours]
     context = {
@@ -55,7 +57,7 @@ def appointment(request):
 @staff_credentials(login_url='/admin/')
 def schedules(request):
     try:
-        my_appointments = Appointment.objects.all().order_by('-date')
+        my_appointments = Appointment.objects.all().order_by('date')
         context = {
             'object': 'Schedule',
             'my_appointments': my_appointments
