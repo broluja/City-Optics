@@ -57,8 +57,8 @@
                         </datalist>
                     {% endif %}
                     {% if request.user.is_authenticated %}
-                    <input id="name" name="name" type="text" placeholder="Your Name" class="tm-input" value="{{request.user.first_name}} {{request.user.last_name}}" required/>
-                    <input id="email" name="email" type="email" placeholder="Your Email" class="tm-input"/ value="{{request.user.email}}">
+                    <input readonly id="name" name="name" type="text" placeholder="Your Name" class="tm-input" value="{{request.user.first_name}} {{request.user.last_name}}" required/>
+                    <input readonly id="email" name="email" type="email" placeholder="Your Email" class="tm-input"/ value="{{request.user.email}}">
                     {% else %}
                     <input id="name" name="name" type="text" placeholder="Your Name" class="tm-input" required/>
                     <input id="email" name="email" type="email" placeholder="Your Email" class="tm-input"/>
