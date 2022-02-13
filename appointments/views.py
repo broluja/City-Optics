@@ -33,8 +33,11 @@ def appointment(request):
     hours = Appointment.HOURS
     day = request.POST.get('day')
     customer = None
+
     if request.user.is_authenticated:
         customer = request.user.customer
+        customer.phone = phone
+        customer.save()
 
     for pair in hours:
         value, key = pair

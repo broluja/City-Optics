@@ -9,6 +9,7 @@ class Customer(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     slug = models.SlugField(blank=True, null=True)
     email = models.CharField(max_length=55, unique=True)
+    phone = models.CharField(max_length=99, blank=True, null=True)
     created_on = models.DateTimeField(auto_now_add=True)
     discount_used = models.BooleanField(default=False)
     code = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)

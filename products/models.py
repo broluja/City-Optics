@@ -1,5 +1,4 @@
 from PIL import Image
-from datetime import datetime
 
 from django.db import models
 from django.db.models import Q
@@ -28,16 +27,8 @@ class Product(models.Model):
     def __str__(self):
         return f"{self.name}: ${self.price}"
 
-    def save(self, *args, **kwargs):
-        super(Product, self).save(*args, **kwargs)
-        img = Image.open(self.image.path)
-        if img.height > 1000 or img.width > 800:
-            output_size = (800, 1000)
-            img.thumbnail(output_size)
-            img.save()
-
     def get_absolute_url(self):
-        return f"/product/{self.id}"
+        return f"/products/product-detail/{self.id}"
 
     objects = ProductManager()
 

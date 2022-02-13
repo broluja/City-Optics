@@ -18,6 +18,7 @@ class CustomerCreationForm(UserCreationForm):
             'last_name': '',
             'username': '',
             'email': '',
+            'phone': '',
         }
         widgets = {
             'first_name': forms.TextInput(

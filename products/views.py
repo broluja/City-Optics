@@ -86,6 +86,8 @@ def order(request):
             customer = None
             if request.user.is_authenticated:
                 customer = request.user.customer
+                customer.phone = phone
+                customer.save()
 
             context = {
                 "product": product,
@@ -205,7 +207,7 @@ class OrderAPIView(APIView):
     @staticmethod
     def get_object():
         try:
-            return Order.objects.filter()
+            return Order.objects.all()
         except Order.DoesNotExist:
             raise status.HTTP_404_NOT_FOUND
 

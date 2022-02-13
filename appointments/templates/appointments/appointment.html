@@ -39,8 +39,8 @@
             <div class="col-sm-12 col-md-6 mt-5">
                 <form action="{% url 'appointment' %}" method="POST">
                     {% csrf_token %}
-                    <input type="date" min="2020-01-02" max="2030-01-02" class="tm-input" placeholder="Choose day" name="day">
-                    <select id="hours" name="hours" class="tm-input" required>
+                    <input required type="date" min="2020-01-02" max="2030-01-02" class="tm-input form-control form-control-lg" placeholder="Choose day" name="day">
+                    <select id="hours" name="hours" class="tm-input form-control form-control-lg" required>
                         <option value="">Choose Hour</option>
                         {% for hour in hours %}
                         <option value="{{hour}}" style="color:gray;">{{hour}}</option>
@@ -49,11 +49,13 @@
                     {% if request.user.is_authenticated %}
                     <input readonly id="name" name="name" type="text" placeholder="Your Name" class="tm-input" value="{{ request.user.first_name }} {{ request.user.last_name }}" required/>
                     <input readonly id="email" name="email" type="text" placeholder="Your Email" class="tm-input" value="{{ request.user.email }}"/>
+                    <input id="phone" name="phone" type="tel" placeholder="Your Phone" class="tm-input" required
+                           {% if request.user.customer.phone%} value="{{request.user.customer.phone}}" {% endif %}/>
                     {% else %}
                     <input id="name" name="name" type="text" placeholder="Your Name" class="tm-input" required/>
                     <input id="email" name="email" type="text" placeholder="Your Email" class="tm-input"/>
-                    {% endif %}
                     <input id="phone" name="phone" type="tel" placeholder="Your Phone" class="tm-input" required/>
+                    {% endif %}
                     <textarea id="message" name="message" rows="8" placeholder="Message" class="tm-input"></textarea>
                     <button type="submit" class="btn tm-btn-submit btn-primary">Submit</button>
                 </form>
