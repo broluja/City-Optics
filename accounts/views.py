@@ -3,19 +3,20 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from django.core.exceptions import ObjectDoesNotExist
 
 # Custom APP imports
 from .forms import CustomerCreationForm, CustomerUpdateForm, TestimonyForm
 from .models import Customer, Coupon
-from .serializers import CustomerSerializer, CouponSerializer
+from .serializers import CustomerSerializer, CouponSerializer, RegistrationSerializer
 
 # Third party imports
 from rest_framework.views import APIView, Response
-from rest_framework.permissions import IsAdminUser
+from rest_framework.permissions import IsAdminUser, AllowAny
 from rest_framework import status
+from rest_framework.decorators import api_view, permission_classes
 
 
 def register(request):
@@ -175,3 +176,19 @@ class CouponAPIView(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_404_NOT_FOUND)
+
+
+@api_view(['POST'])
+@permission_classes((AllowAny, ))
+def registration_view(request):
+    if request.method == 'POST':
+        serializer = RegistrationSerializer(data=request.data)
+        data = {}
+        if serializer.is_valid():
+            user = serializer.save()
+            data['response'] = 'Successfully registered new user.'
+            data['email'] = user.email
+            data['username'] = user.username
+        else:
+            data = serializer.errors
+        return Response(data)

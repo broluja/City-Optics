@@ -3,6 +3,15 @@
 
 {% block title %}Schedules{% endblock title %}
 
+{% block css%}
+<style>
+    tr.htmx-swapping td {
+    opacity: 0;
+    transition: opacity 1s ease-out;
+}
+</style>
+{% endblock css %}
+
 {% block content %}
 
 {% include 'navbar.html' %}
@@ -28,25 +37,61 @@
     <br>
     <h1>My Appointments</h1>
     <br/><br/>
-    <table class="table table table-striped table-hover">
-        <tr>
+<!--    <table class="table table table-striped table-hover">-->
+<!--        <tr>-->
 
-            <th scope="col">Name</th>
-            <th scope="col">Date</th>
-            <th scope="col">Hour</th>
-            <th scope="col">Message</th>
+<!--            <th scope="col">Name</th>-->
+<!--            <th scope="col">Date</th>-->
+<!--            <th scope="col">Hour</th>-->
+<!--            <th scope="col">Message</th>-->
+<!--        </tr>-->
+<!--        {% for appointment in my_appointments %}-->
+<!--            {% if appointment.is_confirmed %}-->
+<!--        <tr>-->
+
+<!--            <td>{{ appointment.name}}</td>-->
+<!--            <td>{{ appointment.date }}</td>-->
+<!--            <td>{{ appointment.hour}}</td>-->
+<!--            <td><small>{{ appointment.message }}</small></td>-->
+<!--        </tr>-->
+<!--            {% endif %}-->
+<!--        {% endfor %}-->
+<!--    </table>-->
+
+
+    <table class="table delete-row-example">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Date</th>
+          <th>Hour</th>
+          <th>Message</th>
+          <th></th>
         </tr>
-        {% for appointment in my_appointments %}
-            {% if appointment.is_confirmed %}
-        <tr>
+      </thead>
+      <tbody hx-confirm="Are you sure?" hx-target="closest tr" hx-swap="outerHTML swap:1s">
 
+      {% for appointment in my_appointments %}
+        {% if appointment.is_confirmed %}
+        <tr>
             <td>{{ appointment.name}}</td>
-            <td>{{ appointment.date }}</td>
+            <td>{{ appointment.date}}</td>
             <td>{{ appointment.hour}}</td>
-            <td><small>{{ appointment.message }}</small></td>
-        </tr>
+            <td>{{ appointment.message}}</td>
+            <td>
+                <button class="btn btn-danger" hx-get="{% url 'delete_appointment' appointment.id %}">Done</button>
+            </td>
             {% endif %}
         {% endfor %}
-    </table>
+        </tr>
+      </tbody>
+</table>
+
+
+
+
 </div>
+
+
+
 {% endblock content %}

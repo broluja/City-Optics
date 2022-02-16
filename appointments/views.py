@@ -70,6 +70,12 @@ def schedules(request):
         raise Http404
 
 
+def delete_appointment(request, pk):
+    my_appointment = Appointment.objects.get(pk=pk)
+    my_appointment.delete()
+    return render(request, 'appointments/delete_snippet.html')
+
+
 # API Views
 
 class AppointmentAPIView(APIView):
