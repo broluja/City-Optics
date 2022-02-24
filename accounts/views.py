@@ -4,7 +4,8 @@ from django.contrib import messages
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
-from django.http import Http404
+from django.contrib.auth.models import User
+from django.http import Http404, HttpResponse
 from django.core.exceptions import ObjectDoesNotExist
 
 # Custom APP imports
@@ -192,3 +193,15 @@ def registration_view(request):
         else:
             data = serializer.errors
         return Response(data)
+
+
+# HtmX views
+
+def hx_username(request):
+    username = request.GET.get('username')
+    if username:
+        if User.objects.filter(username=username).exists():
+            return HttpResponse(f'<p style="color:red;">Username: {username} is not available!</p>')
+        return HttpResponse(f'<p style="color:green;">Username: {username} is available.</p>')
+    return HttpResponse('Hints')
+

@@ -9,10 +9,12 @@ from .models import Testimony
 class CustomerCreationForm(UserCreationForm):
     first_name = forms.TextInput()
     last_name = forms.TextInput()
+    field_order = ["username", "first_name", "last_name", "email", "password1", "password2"]
 
     class Meta:
         model = User
         fields = ["first_name", "last_name", "username", "email", "password1", "password2"]
+
         labels = {
             'first_name': '',
             'last_name': '',
@@ -26,7 +28,9 @@ class CustomerCreationForm(UserCreationForm):
             'last_name': forms.TextInput(
                 attrs={'class': 'form-control form-control-lg mt-3 mb-3', 'placeholder': 'Last Name'}),
             'username': forms.TextInput(
-                attrs={'class': 'form-control mt-3 mb-3', 'placeholder': 'Username'}),
+                attrs={'class': 'form-control mt-3 mb-3', 'placeholder': 'Username',
+                       'hx-get': '/accounts/hx_username', 'hx-target': '#used-username', 'hx-swap': 'innerHtml',
+                       'hx-trigger': 'keyup delay:300ms'}),
             'email': forms.TextInput(
                 attrs={'class': 'form-control form-control-lg mt-3 mb-3', 'placeholder': 'Email Address'}),
         }

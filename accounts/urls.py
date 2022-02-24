@@ -10,3 +10,9 @@ urlpatterns = [
     path('testimony/', views.testify, name='testimony'),
     path('edit-testimony/<slug:slug>/', views.edit_testimony, name='edit_testimony'),
 ]
+
+htmx_urlpatterns = [
+    path('hx_username', views.hx_username, name='hx_username')
+]
+
+urlpatterns += htmx_urlpatterns

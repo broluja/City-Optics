@@ -17,6 +17,7 @@
         </div>
 
         <div class="col-sm-12 col-md-6">
+            <center><div id="used-username" style="font-size:13px;">Hints</div></center>
             <form method="POST" enctype='multipart/form-data'>
                 {% csrf_token %}
                 {{ form|crispy }}
