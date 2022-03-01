@@ -2,6 +2,9 @@ from django.shortcuts import render
 from django.http import Http404
 from django.contrib.auth.decorators import user_passes_test
 from django.core.exceptions import ObjectDoesNotExist
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_http_methods
+
 from .models import Appointment
 from .serializers import AppointmentSerializer
 
@@ -70,6 +73,8 @@ def schedules(request):
         raise Http404
 
 
+@login_required
+@require_http_methods(['DELETE'])
 def delete_appointment(request, pk):
     my_appointment = Appointment.objects.get(pk=pk)
     my_appointment.delete()

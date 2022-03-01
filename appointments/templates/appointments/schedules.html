@@ -54,7 +54,7 @@
                     <td>{{ appointment.hour}}</td>
                     <td>{{ appointment.message|truncatechars:99}}</td>
                     <td>
-                        <button class="btn btn-danger btn-sm" hx-get="{% url 'delete_appointment' appointment.id %}">
+                        <button class="btn btn-danger btn-sm" hx-delete="{% url 'delete_appointment' appointment.id %}">
                             Done</button>
                     </td>
                 </tr>
