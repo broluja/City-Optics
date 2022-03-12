@@ -90,7 +90,7 @@ class AppointmentAPIView(APIView):
     def get_object():
         try:
             return Appointment.objects.filter(is_confirmed=True).order_by('date')
-        except Appointment.DoesNotExist:
+        except ObjectDoesNotExist:
             raise status.HTTP_404_NOT_FOUND
 
     def get(self, request):

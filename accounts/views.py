@@ -201,7 +201,7 @@ def hx_username(request):
     username = request.GET.get('username')
     if username:
         if User.objects.filter(username=username).exists():
-            return HttpResponse(f'<p style="color:red;">Username: {username} is not available!</p>')
+            return HttpResponse(f'<p style="color:red; font-size:17px;">Username: {username} is not available!</p>')
         return HttpResponse(f'<p style="color:green;">Username: {username} is available.</p>')
     return HttpResponse('Hints')
 

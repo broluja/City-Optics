@@ -56,7 +56,7 @@ def create_product(request):
             form.save()
             return redirect('products')
     else:
-        form = ProductForm()
+        form = ProductForm(initial={'name': 'CityOptics Product', 'description': 'Please make some effort here...'})
         return render(request, 'products/product_form.html', {'form': form})
 
 
@@ -68,7 +68,7 @@ class ProductListView(ListView):
 
     # When you want to add extra context, override this function
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(*kwargs)
+        context = super().get_context_data(**kwargs)
         context.update({'object': 'All Products'})
         return context
 
@@ -115,7 +115,8 @@ def order(request):
                         request.user.customer.save()
                         messages.success(request, 'Your coupon was accepted. 5% discount applied')
                         return render(request, 'products/order.html', context)
-                    except:
+                    except Exception as e:
+                        print(e)
                         messages.warning(request, 'Your coupon was already used. Order is rejected.')
                         return redirect('city-optics')
 

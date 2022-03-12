@@ -27,3 +27,4 @@ class Appointment(models.Model):
     def __str__(self):
         return f'{self.name} requests for: {self.date}, {self.hour}'
 
+    objects = models.Manager()

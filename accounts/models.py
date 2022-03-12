@@ -33,6 +33,8 @@ class Coupon(models.Model):
     def __str__(self):
         return self.code
 
+    objects = models.Manager()
+
 
 class Testimony(models.Model):
     customer = models.OneToOneField(Customer, on_delete=models.CASCADE)
@@ -45,6 +47,10 @@ class Testimony(models.Model):
     def __str__(self):
         return self.customer.user.username
 
+    objects = models.Manager()
+
     class Meta:
         verbose_name_plural = 'Testimonies'
+
+
 
