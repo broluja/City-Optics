@@ -18,4 +18,4 @@ class Command(BaseCommand):
                 present = row['present']
                 description = row['description']
                 Product.objects.create(name=name, price=price, present=present, description=description)
-        print(f'Products are created from: {options["file_name"]}')
+        print(f'Products are created from: {file}')
