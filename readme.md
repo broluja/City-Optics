@@ -14,4 +14,4 @@
 
 # With Django Rest_framework:
 1. Get APIs for Products, Orders, Appointments and Used Coupons 
-2. Post APIs for creating new Product
+2. Post APIs for creating new Product (only for admin)

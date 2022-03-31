@@ -4,12 +4,16 @@ from django.contrib.auth.models import User
 from django.core.mail import EmailMessage
 from django.conf import settings
 from django.template.loader import render_to_string
+
 from .models import Customer
+
+from rest_framework.authtoken.models import Token
 
 
 @receiver(post_save, sender=User)
 def post_save_customer_creation(sender, instance, created, *args, **kwargs):
     if created:
+        Token.objects.create(user=instance)
         Customer.objects.create(user=instance, email=instance.email)
 
 

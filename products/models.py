@@ -43,6 +43,8 @@ class Order(models.Model):
     discount_approved = models.BooleanField(default=False)
     customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True, blank=True)
 
+    objects = models.Manager()
+
     def __str__(self):
         return f"{self.product}"
 
@@ -59,6 +61,8 @@ class Message(models.Model):
     phone = models.CharField(max_length=33, blank=True, null=True)
     text_message = models.TextField(max_length=555)
     sent_on = models.DateTimeField(auto_now_add=True)
+
+    objects = models.Manager()
 
     def __str__(self):
         return f'{self.name} wrote on {self.sent_on.strftime("%A, %d. %B %Y %I:%M%p")}'

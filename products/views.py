@@ -14,7 +14,7 @@ from .serializers import ProductSerializer, OrderSerializer, MessageSerializer
 # Third party imports
 from rest_framework import status
 from rest_framework.views import APIView, Response
-from rest_framework.permissions import IsAdminUser
+from rest_framework.permissions import IsAdminUser, IsAuthenticated
 
 
 # Defining function that covers Permission
@@ -179,13 +179,13 @@ def city_optics(request):
 # API Views
 
 class ProductAPIView(APIView):
-    permission_classes = [IsAdminUser]
+    permission_classes = [IsAuthenticated]
 
     @staticmethod
     def get_object():
         try:
             return Product.objects.filter(present=True).order_by('price')
-        except Product.DoesNotExist:
+        except ObjectDoesNotExist:
             raise status.HTTP_404_NOT_FOUND
 
     def get(self, request):
@@ -209,7 +209,7 @@ class OrderAPIView(APIView):
     def get_object():
         try:
             return Order.objects.all()
-        except Order.DoesNotExist:
+        except ObjectDoesNotExist:
             raise status.HTTP_404_NOT_FOUND
 
     def get(self, request):
@@ -225,7 +225,7 @@ class MessageAPIView(APIView):
     def get_object():
         try:
             return Message.objects.all()
-        except Message.DoesNotExist:
+        except ObjectDoesNotExist:
             raise status.HTTP_404_NOT_FOUND
 
     def get(self, request):

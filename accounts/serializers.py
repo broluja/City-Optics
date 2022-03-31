@@ -22,6 +22,10 @@ class RegistrationSerializer(serializers.ModelSerializer):
         }
 
     def save(self, **kwargs):
+
+        if User.objects.filter(email=self.validated_data['email']).exists():
+            raise serializers.ValidationError({'email': 'User with this email already registered.'})
+
         user = User(
             email=self.validated_data['email'],
             username=self.validated_data['username'],
@@ -31,6 +35,7 @@ class RegistrationSerializer(serializers.ModelSerializer):
         if password != password2:
             raise serializers.ValidationError({'password': 'Passwords must match'})
         user.set_password(password)
+        user.save()
         return user
 
 

@@ -18,6 +18,7 @@ from rest_framework.views import APIView, Response
 from rest_framework.permissions import IsAdminUser, AllowAny
 from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
+from rest_framework.authtoken.models import Token
 
 
 def register(request):
@@ -190,6 +191,8 @@ def registration_view(request):
             data['response'] = 'Successfully registered new user.'
             data['email'] = user.email
             data['username'] = user.username
+            token = Token.objects.get(user=user).key
+            data['token'] = token
         else:
             data = serializer.errors
         return Response(data)

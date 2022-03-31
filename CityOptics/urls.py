@@ -11,9 +11,9 @@ urlpatterns = [
     path('products/', include('products.urls')),
     path('appointments/', include('appointments.urls')),
     path('accounts/', include('accounts.urls')),
-    path('appointments/api/', include('appointments.api_urls')),
-    path('products/api/', include('products.api_urls')),
-    path('accounts/api/', include('accounts.api_urls')),
+    path('api/appointments/', include('appointments.api_urls')),
+    path('api/products/', include('products.api_urls')),
+    path('api/accounts/', include('accounts.api_urls')),
 ]
 
 if settings.DEBUG:
