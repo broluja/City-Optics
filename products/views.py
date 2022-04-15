@@ -6,15 +6,17 @@ from django.views.generic import ListView
 from django.core.exceptions import ObjectDoesNotExist
 from accounts.models import Coupon
 
-from .models import Message, Product, Order
+from .models import Message, Product, Order, Reply
 from accounts.models import Testimony
 from .forms import ProductForm
-from .serializers import ProductSerializer, OrderSerializer, MessageSerializer
+from .serializers import ProductSerializer, OrderSerializer, MessageSerializer, ReplySerializer
 
 # Third party imports
 from rest_framework import status
 from rest_framework.views import APIView, Response
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
+from rest_framework.generics import CreateAPIView
+from rest_framework.authentication import TokenAuthentication
 
 
 # Defining function that covers Permission
@@ -203,7 +205,7 @@ class ProductAPIView(APIView):
 
 
 class OrderAPIView(APIView):
-    permission_classes = [IsAdminUser]
+    permission_classes = [IsAuthenticated]
 
     @staticmethod
     def get_object():
@@ -212,8 +214,18 @@ class OrderAPIView(APIView):
         except ObjectDoesNotExist:
             raise status.HTTP_404_NOT_FOUND
 
+    @staticmethod
+    def get_relative_object(request):
+        try:
+            return Order.objects.filter(customer=request.user.customer)
+        except ObjectDoesNotExist:
+            raise status.HTTP_404_NOT_FOUND
+
     def get(self, request):
-        queryset = self.get_object()
+        if request.user.is_superuser:
+            queryset = self.get_object()
+        else:
+            queryset = self.get_relative_object(request)
         serializer = OrderSerializer(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
@@ -229,6 +241,15 @@ class MessageAPIView(APIView):
             raise status.HTTP_404_NOT_FOUND
 
     def get(self, request):
+        print(request.auth)
         queryset = self.get_object()
         serializer = MessageSerializer(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+class ReplyCreateAPIView(CreateAPIView):
+    permission_classes = [IsAdminUser]
+    serializer_class = ReplySerializer
+
+
+

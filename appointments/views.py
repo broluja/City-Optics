@@ -12,7 +12,7 @@ from .serializers import AppointmentSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from rest_framework.permissions import IsAdminUser
+from rest_framework.permissions import IsAuthenticated
 
 
 def staff_credentials(login_url=None, *args, **kwargs):
@@ -84,7 +84,7 @@ def delete_appointment(request, pk):
 # API Views
 
 class AppointmentAPIView(APIView):
-    permission_classes = [IsAdminUser]
+    permission_classes = [IsAuthenticated]
 
     @staticmethod
     def get_object():
@@ -93,7 +93,17 @@ class AppointmentAPIView(APIView):
         except ObjectDoesNotExist:
             raise status.HTTP_404_NOT_FOUND
 
+    @staticmethod
+    def get_relative_object(request):
+        try:
+            return Appointment.objects.filter(customer=request.user.customer)
+        except ObjectDoesNotExist:
+            raise status.HTTP_404_NOT_FOUND
+
     def get(self, request):
-        queryset = self.get_object()
+        if request.user.is_superuser:
+            queryset = self.get_object()
+        else:
+            queryset = self.get_relative_object(request)
         serializer = AppointmentSerializer(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)

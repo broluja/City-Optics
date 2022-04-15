@@ -41,7 +41,7 @@ class Order(models.Model):
     message = models.TextField(blank=True, null=True, max_length=555)
     is_shipped = models.BooleanField(default=False)
     discount_approved = models.BooleanField(default=False)
-    customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True, blank=True)
+    customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True, blank=True, related_name='customer')
 
     objects = models.Manager()
 
@@ -66,3 +66,13 @@ class Message(models.Model):
 
     def __str__(self):
         return f'{self.name} wrote on {self.sent_on.strftime("%A, %d. %B %Y %I:%M%p")}'
+
+
+class Reply(models.Model):
+    message = models.ForeignKey(Message, on_delete=models.CASCADE, related_name='reply')
+    content = models.TextField()
+    date_created = models.DateTimeField(auto_now_add=True)
+
+    objects = models.Manager()
+
+

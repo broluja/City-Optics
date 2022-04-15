@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Product, Order, Message
+from .models import Product, Order, Message, Reply
 from django.contrib.auth.models import User
 
 admin.site.unregister(User)
@@ -29,6 +29,15 @@ class OrderAdmin(admin.ModelAdmin):
     list_filter = ('product',)
 
 
+class ReplyInline(admin.StackedInline):
+    model = Reply
+    extra = 1
+    verbose_name_plural = 'Replies'
+    can_delete = True
+    show_change_link = True
+
+
 @admin.register(Message)
 class MessageAdmin(admin.ModelAdmin):
-    list_display = ('__str__', 'mail', 'text_message',)
+    inlines = (ReplyInline, )
+    list_display = ('__str__', 'mail', 'text_message', 'id')
