@@ -13,6 +13,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.decorators import api_view
 
 
 def staff_credentials(login_url=None, *args, **kwargs):
@@ -107,3 +108,37 @@ class AppointmentAPIView(APIView):
             queryset = self.get_relative_object(request)
         serializer = AppointmentSerializer(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+@api_view(['POST'])
+def post_appointment(request):
+    if request.method == 'POST':
+        serializer = AppointmentSerializer(data=request.data)
+        data = {}
+        if serializer.is_valid():
+            edited_appointment = serializer.save()
+            data['response'] = 'Successfully posted appointment.'
+            data['appointment'] = edited_appointment.name
+        else:
+            data = serializer.errors
+        return Response(data)
+
+
+@api_view(['PUT'])
+def edit_appointment(request):
+    data = {}
+    try:
+        queryset = Appointment.objects.get(id=request.data['id'])
+    except ObjectDoesNotExist:
+        data['response'] = 'Object does not exist!'
+        return Response(data, status=status.HTTP_404_NOT_FOUND)
+    serializer = AppointmentSerializer(queryset, data=request.data)
+
+    if serializer.is_valid():
+        edited_appointment = serializer.save()
+        data['response'] = 'Successfully edited appointment.'
+        data['appointment'] = edited_appointment.name
+        return Response(data, status=status.HTTP_200_OK)
+    else:
+        data = serializer.errors
+        return Response(data, status=status.HTTP_404_NOT_FOUND)
