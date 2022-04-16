@@ -10,6 +10,7 @@ from .models import Reply
 @receiver(post_save, sender=Reply)
 def post_save_email_sending(sender, instance, created, **kwargs):
     print(kwargs, sender)
+    title = instance.title
     content = instance.content
     email_address = instance.message.mail
     customer = instance.message.name
@@ -29,6 +30,6 @@ def post_save_email_sending(sender, instance, created, **kwargs):
     if created:
         # Mail with response for customer
         template = render_to_string('reply.html', context)
-        email.subject = 'Admin Reply'
+        email.subject = title
         email.body = template
         email.send()

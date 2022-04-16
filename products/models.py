@@ -1,5 +1,3 @@
-from PIL import Image
-
 from django.db import models
 from django.db.models import Q
 from accounts.models import Customer
@@ -17,7 +15,7 @@ class ProductManager(models.Manager):
 
 class Product(models.Model):
     name = models.CharField(max_length=150)
-    price = models.FloatField()
+    price = models.DecimalField(max_digits=10, decimal_places=2)
     present = models.BooleanField(default=False)
     description = models.TextField()
     image = models.ImageField(default='default.jpg', upload_to='products_pics')
@@ -70,6 +68,7 @@ class Message(models.Model):
 
 class Reply(models.Model):
     message = models.ForeignKey(Message, on_delete=models.CASCADE, related_name='reply')
+    title = models.CharField(max_length=99, blank=True, null=True)
     content = models.TextField()
     date_created = models.DateTimeField(auto_now_add=True)
 

@@ -26,9 +26,17 @@ class OrderSerializer(serializers.ModelSerializer):
 
 
 class MessageSerializer(serializers.ModelSerializer):
+    sent_on = serializers.SerializerMethodField('get_clear_date')
+
     class Meta:
         model = Message
-        fields = '__all__'
+        fields = ('id', 'name', 'mail', 'phone', 'text_message', 'sent_on')
+
+    @staticmethod
+    def get_clear_date(message):
+        date = message.sent_on
+        clean_date = date.strftime("%d/%m/%Y at %H:%Mh")
+        return clean_date
 
 
 class ReplySerializer(serializers.ModelSerializer):
