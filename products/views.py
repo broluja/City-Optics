@@ -16,7 +16,7 @@ from rest_framework import status
 from rest_framework.views import APIView, Response
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
 from rest_framework.generics import CreateAPIView
-from rest_framework.authentication import TokenAuthentication
+from rest_framework.decorators import api_view, permission_classes
 
 
 # Defining function that covers Permission
@@ -181,7 +181,7 @@ def city_optics(request):
 # API Views
 
 class ProductAPIView(APIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAdminUser]
 
     @staticmethod
     def get_object():
@@ -199,9 +199,60 @@ class ProductAPIView(APIView):
     def post(request):
         serializer = ProductSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_404_NOT_FOUND)
+
+
+@api_view(['POST'])
+@permission_classes((IsAdminUser, ))
+def post_new_product_api(request):
+    serializer = ProductSerializer(data=request.data)
+    data = {}
+    if serializer.is_valid():
+        new_product = serializer.save()
+        data['success'] = 'New product created!'
+        data['product'] = new_product.name
+        data['price'] = str(new_product)
+        return Response(data, status=status.HTTP_201_CREATED)
+    else:
+        data = serializer.errors
+        return Response(data, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['POST'])
+@permission_classes((IsAdminUser, ))
+def edit_product_api(request):
+    data = {}
+    try:
+        product = Product.objects.get(id=request.data['id'])
+    except ObjectDoesNotExist:
+        data['response'] = 'Object not found'
+        return Response(data, status=status.HTTP_404_NOT_FOUND)
+    serializer = ProductSerializer(product, data=request.data)
+    if serializer.is_valid():
+        edited_product = serializer.save()
+        data['success'] = 'Product edited'
+        data['product'] = str(edited_product)
+        return Response(data, status=status.HTTP_200_OK)
+    else:
+        data = serializer.errors
+        return Response(data, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['POST'])
+@permission_classes((IsAdminUser, ))
+def delete_product_api(request):
+    data = {}
+    try:
+        print(request.data)
+        product = Product.objects.get(id=request.data['id'])
+    except ObjectDoesNotExist:
+        data['response'] = 'Object not found'
+        return Response(data, status=status.HTTP_404_NOT_FOUND)
+    data['object'] = str(product)
+    product.delete()
+    data['success'] = 'Object deleted!'
+    return Response(data, status=status.HTTP_200_OK)
 
 
 class OrderAPIView(APIView):

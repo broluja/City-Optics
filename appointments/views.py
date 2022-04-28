@@ -12,8 +12,8 @@ from .serializers import AppointmentSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from rest_framework.permissions import IsAuthenticated
-from rest_framework.decorators import api_view
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
+from rest_framework.decorators import api_view, permission_classes
 
 
 def staff_credentials(login_url=None, *args, **kwargs):
@@ -111,20 +111,22 @@ class AppointmentAPIView(APIView):
 
 
 @api_view(['POST'])
+@permission_classes((IsAdminUser, ))
 def post_appointment(request):
     if request.method == 'POST':
         serializer = AppointmentSerializer(data=request.data)
         data = {}
         if serializer.is_valid():
-            edited_appointment = serializer.save()
+            new_appointment = serializer.save()
             data['response'] = 'Successfully posted appointment.'
-            data['appointment'] = edited_appointment.name
+            data['appointment'] = new_appointment.name
         else:
             data = serializer.errors
         return Response(data)
 
 
 @api_view(['PUT'])
+@permission_classes((IsAdminUser, ))
 def edit_appointment(request):
     data = {}
     try:
@@ -141,4 +143,4 @@ def edit_appointment(request):
         return Response(data, status=status.HTTP_200_OK)
     else:
         data = serializer.errors
-        return Response(data, status=status.HTTP_404_NOT_FOUND)
+        return Response(data, status=status.HTTP_400_BAD_REQUEST)

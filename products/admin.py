@@ -16,7 +16,7 @@ class UserAdmin(admin.ModelAdmin):
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('__str__', 'present')
+    list_display = ('__str__', 'present', 'id')
     list_editable = ('present',)
     ordering = ('price',)
 
