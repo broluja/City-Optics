@@ -6,6 +6,7 @@ from django.views.generic import ListView
 from django.core.exceptions import ObjectDoesNotExist
 from accounts.models import Coupon
 
+# Custom APPs imports
 from .models import Message, Product, Order
 from accounts.models import Testimony
 from .forms import ProductForm

@@ -60,7 +60,7 @@
                    aria-current="true" style="background:#2e5078;">
                     Go to Orders
                 </a>
-                {% for order in customer.order_set.all %}
+                {% for order in customer.orders.all %}
                 <a href="{% url 'product_details' order.product.pk %}" type="button" class="list-group-item list-group-item-action">{{ order.product.name }}
                     <cite {% if order.discount_approved %}style="text-decoration:line-through;" {% endif %}>${{order.product.price}}</cite>
                     | </a><a type="button" class="list-group-item list-group-item-action">

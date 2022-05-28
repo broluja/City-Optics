@@ -39,7 +39,7 @@ class Order(models.Model):
     message = models.TextField(blank=True, null=True, max_length=555)
     is_shipped = models.BooleanField(default=False)
     discount_approved = models.BooleanField(default=False)
-    customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True, blank=True, related_name='customer')
+    customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True, blank=True, related_name='orders')
 
     objects = models.Manager()
 

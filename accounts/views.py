@@ -34,7 +34,6 @@ def register(request):
         form.save()
         messages.success(request, 'You successfully Registered. Discount code is sent to your email. Log IN')
         return redirect('login')
-
     else:
         form = CustomerCreationForm(request.POST)
         context = {'form': form}
@@ -200,6 +199,7 @@ def registration_view(request):
 
 # HtmX views
 
+# View for giving suggestions on register page
 def hx_username(request):
     username = request.GET.get('username')
     if username:

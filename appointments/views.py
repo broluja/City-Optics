@@ -5,6 +5,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_http_methods
 
+# Custom APPs imports
 from .models import Appointment
 from .serializers import AppointmentSerializer
 
