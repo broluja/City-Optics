@@ -6,7 +6,7 @@ from django.views.generic import ListView
 from django.core.exceptions import ObjectDoesNotExist
 from accounts.models import Coupon
 
-from .models import Message, Product, Order, Reply
+from .models import Message, Product, Order
 from accounts.models import Testimony
 from .forms import ProductForm
 from .serializers import ProductSerializer, OrderSerializer, MessageSerializer, ReplySerializer
