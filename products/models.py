@@ -37,7 +37,8 @@ class Order(models.Model):
     phone = models.CharField(max_length=33)
     email = models.EmailField(blank=True, null=True)
     message = models.TextField(blank=True, null=True, max_length=555)
-    is_shipped = models.BooleanField(default=False)
+    is_shipped = models.BooleanField(default=False,
+                                     help_text='When you prepare and send this order to customer, it`s shipped!')
     discount_approved = models.BooleanField(default=False)
     customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True, blank=True, related_name='orders')
 
@@ -50,7 +51,7 @@ class Order(models.Model):
         if self.discount_approved:
             new_price = self.product.price * 0.95
             return new_price
-        return self.product.price
+        return self.product.priceprice
 
 
 class Message(models.Model):
@@ -73,5 +74,3 @@ class Reply(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
 
     objects = models.Manager()
-
-

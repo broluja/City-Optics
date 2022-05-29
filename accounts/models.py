@@ -17,6 +17,9 @@ class Customer(models.Model):
     def __str__(self):
         return self.user.username
 
+    def __repr__(self):
+        return self.user.username
+
     def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
         super().save()
         value = f"{self.user.first_name} {self.user.last_name} {self.user.username}"

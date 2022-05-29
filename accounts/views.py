@@ -198,7 +198,6 @@ def registration_view(request):
 
 
 # HtmX views
-
 # View for giving suggestions on register page
 def hx_username(request):
     username = request.GET.get('username')

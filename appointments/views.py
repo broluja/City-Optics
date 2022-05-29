@@ -86,10 +86,12 @@ def delete_appointment(request, pk):
 # API Views
 
 class AppointmentAPIView(APIView):
+    """ Returns all confirmed Appointments if superuser, else just user`s submitted. """
     permission_classes = [IsAuthenticated]
 
     @staticmethod
     def get_object():
+        """ Superuser`s query. """
         try:
             return Appointment.objects.filter(is_confirmed=True).order_by('date')
         except ObjectDoesNotExist:
@@ -97,6 +99,7 @@ class AppointmentAPIView(APIView):
 
     @staticmethod
     def get_relative_object(request):
+        """ Common user`s query. """
         try:
             return Appointment.objects.filter(customer=request.user.customer)
         except ObjectDoesNotExist:
@@ -114,6 +117,7 @@ class AppointmentAPIView(APIView):
 @api_view(['POST'])
 @permission_classes((IsAdminUser, ))
 def post_appointment(request):
+    """ Post new appointment. Superuser`s API. """
     if request.method == 'POST':
         serializer = AppointmentSerializer(data=request.data)
         data = {}
@@ -129,6 +133,7 @@ def post_appointment(request):
 @api_view(['PUT'])
 @permission_classes((IsAdminUser, ))
 def edit_appointment(request):
+    """ Edit appointment. Superuser`s API. """
     data = {}
     try:
         queryset = Appointment.objects.get(id=request.data['id'])

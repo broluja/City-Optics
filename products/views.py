@@ -4,11 +4,10 @@ from django.contrib import messages
 from django.contrib.auth.decorators import user_passes_test
 from django.views.generic import ListView
 from django.core.exceptions import ObjectDoesNotExist
-from accounts.models import Coupon
 
 # Custom APPs imports
 from .models import Message, Product, Order
-from accounts.models import Testimony
+from accounts.models import Testimony, Coupon
 from .forms import ProductForm
 from .serializers import ProductSerializer, OrderSerializer, MessageSerializer, ReplySerializer
 
@@ -302,6 +301,3 @@ class MessageAPIView(APIView):
 class ReplyCreateAPIView(CreateAPIView):
     permission_classes = [IsAdminUser]
     serializer_class = ReplySerializer
-
-
-

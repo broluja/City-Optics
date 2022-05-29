@@ -12,6 +12,7 @@ class ProductSerializer(serializers.ModelSerializer):
 
 class OrderSerializer(serializers.ModelSerializer):
     product = serializers.SerializerMethodField('get_product_name')
+    customer = serializers.SerializerMethodField('get_customer_name')
 
     class Meta:
         model = Order
@@ -22,6 +23,12 @@ class OrderSerializer(serializers.ModelSerializer):
         product = order.product.name
         price = order.product.price
         response = product + ' $' + str(price)
+        return response
+
+    @staticmethod
+    def get_customer_name(order):
+        customer = order.customer.user
+        response = f"Customer`s name: {customer}"
         return response
 
 
