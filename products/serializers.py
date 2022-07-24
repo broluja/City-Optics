@@ -27,8 +27,11 @@ class OrderSerializer(serializers.ModelSerializer):
 
     @staticmethod
     def get_customer_name(order):
-        customer = order.customer.user
-        response = f"Customer`s name: {customer}"
+        try:
+            customer = order.customer.user
+            response = f"Customer`s name: {customer}"
+        except AttributeError:
+            response = f"Customer`s name: Unknown"
         return response
 
 
